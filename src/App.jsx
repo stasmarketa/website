@@ -564,13 +564,18 @@ Together, they bring world-class competitive experience, international recogniti
                         </a>
                       </span>
                     </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                      <MapPin size={18} />
-                      <span style={{ lineHeight: 1.7 }}>
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                      <MapPin size={18} style={{ marginTop: 4, flexShrink: 0 }} />
+                      <a
+                        href="https://maps.google.com/?q=Dance+Fever+Studio+200+Wells+Ave+Newton+MA+02459"
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{ color: "inherit", textDecoration: "none", lineHeight: 1.7 }}
+                      >
                         Boston, MA · Dance Fever Studio
                         <br />
                         200 Wells Ave, Newton, MA 02459
-                      </span>
+                      </a>
                     </div>
                   </div>
                 </div>
