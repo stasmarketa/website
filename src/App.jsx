@@ -376,7 +376,8 @@ export default function BallroomWebsite() {
                       alt="Stas & Marketa dancing"
                       style={{
                         width: "100%",
-                        height: isMobile ? 260 : 420,
+                        height: "auto",
+                        maxHeight: isMobile ? 320 : 520,
                         objectFit: "cover",
                         display: "block",
                       }}
