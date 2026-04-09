@@ -172,16 +172,22 @@ export default function BallroomWebsite() {
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7 }}>
             <div
               style={{
-                display: "inline-flex",
+                display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
+                flexWrap: "wrap",
                 gap: 10,
-                padding: "10px 14px",
+                padding: isMobile ? "10px 12px" : "10px 14px",
                 borderRadius: 999,
                 border: "1px solid rgba(255,255,255,0.12)",
                 background: "rgba(255,255,255,0.04)",
                 color: "rgba(255,255,255,0.82)",
-                fontSize: 14,
+                fontSize: isMobile ? 12 : 14,
+                lineHeight: 1.5,
                 marginBottom: isMobile ? 22 : 28,
+                width: "100%",
+                boxSizing: "border-box",
+                textAlign: "center",
               }}
             >
               <Trophy size={16} />
@@ -193,7 +199,7 @@ export default function BallroomWebsite() {
             </div>
             <h1
               style={{
-                fontSize: isMobile ? "clamp(2.7rem, 14vw, 4rem)" : "clamp(3rem, 8vw, 5.5rem)",
+                fontSize: isMobile ? "clamp(2.35rem, 12vw, 3.5rem)" : "clamp(3rem, 8vw, 5.5rem)",
                 lineHeight: isMobile ? 0.98 : 0.95,
                 margin: isMobile ? "14px 0 16px" : "18px 0 20px",
                 letterSpacing: "-0.04em",
@@ -204,11 +210,11 @@ export default function BallroomWebsite() {
             </h1>
             <p
               style={{
-                fontSize: isMobile ? 18 : 20,
+                fontSize: isMobile ? 16 : 20,
                 lineHeight: 1.7,
                 color: "rgba(255,255,255,0.74)",
                 maxWidth: 720,
-                marginBottom: 28,
+                marginBottom: isMobile ? 20 : 28,
               }}
             >
               We are a professional ballroom partnership available for luxury performances, coaching,
@@ -239,13 +245,13 @@ export default function BallroomWebsite() {
                 <div
                   key={item}
                   style={{
-                    padding: 16,
+                    padding: isMobile ? 14 : 16,
                     borderRadius: 20,
                     border: "1px solid rgba(255,255,255,0.10)",
                     background: "rgba(255,255,255,0.04)",
                     color: "rgba(255,255,255,0.72)",
                     lineHeight: 1.6,
-                    fontSize: 14,
+                    fontSize: isMobile ? 13 : 14,
                   }}
                 >
                   {item}
@@ -273,7 +279,7 @@ export default function BallroomWebsite() {
                   justifyContent: "space-between",
                 }}
               >
-                <div style={{ display: "flex", justifyContent: "space-between", color: "rgba(255,255,255,0.55)", fontSize: 14 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: isMobile ? "wrap" : "nowrap", color: "rgba(255,255,255,0.55)", fontSize: isMobile ? 12 : 14 }}>
                   <span>Featured Partnership</span>
                   <span>International Travel</span>
                 </div>
@@ -291,7 +297,7 @@ export default function BallroomWebsite() {
                       padding: isMobile ? 14 : 28,
                     }}
                   >
-                    <img src="/images/hero.jpg" alt="Stas & Marketa dancing" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 20 }} />
+                    <img src="/images/hero.jpg" alt="Stas & Marketa dancing" style={{ width: "100%", height: isMobile ? 240 : "100%", objectFit: "cover", borderRadius: 20, display: "block" }} />
                   </div>
 
                   <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 14, marginTop: 16 }}>
