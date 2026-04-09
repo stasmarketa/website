@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -73,15 +73,15 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 },
 };
 
-function Wrapper({ children, style }) {
+function Wrapper({ children, style, isMobile }) {
   return (
     <div
       style={{
         width: "100%",
         maxWidth: 1180,
         margin: "0 auto",
-        paddingLeft: 24,
-        paddingRight: 24,
+        paddingLeft: isMobile ? 16 : 24,
+        paddingRight: isMobile ? 16 : 24,
         ...style,
       }}
     >
@@ -106,7 +106,7 @@ function Card({ children, style }) {
   );
 }
 
-function CTAButton({ children, href = "#contact", secondary = false }) {
+function CTAButton({ children, href = "#contact", secondary = false, fullWidth = false }) {
   return (
     <a
       href={href}
@@ -125,7 +125,8 @@ function CTAButton({ children, href = "#contact", secondary = false }) {
         background: secondary ? "transparent" : "white",
         colorScheme: "dark",
         color: secondary ? "white" : "#111111",
-        minWidth: 180,
+        minWidth: fullWidth ? "100%" : 180,
+        width: fullWidth ? "100%" : "auto",
       }}
     >
       {children}
@@ -134,6 +135,17 @@ function CTAButton({ children, href = "#contact", secondary = false }) {
 }
 
 export default function BallroomWebsite() {
+  const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const onResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const isMobile = windowWidth < 768;
+  const isTablet = windowWidth < 1024;
+
   return (
     <div
       style={{
@@ -147,13 +159,14 @@ export default function BallroomWebsite() {
     >
       <section style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <Wrapper
+          isMobile={isMobile}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: 40,
+            gridTemplateColumns: isTablet ? "1fr" : "repeat(2, minmax(0, 1fr))",
+            gap: isMobile ? 28 : 40,
             alignItems: "center",
-            paddingTop: 40,
-            paddingBottom: 64,
+            paddingTop: isMobile ? 24 : 40,
+            paddingBottom: isMobile ? 40 : 64,
           }}
         >
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7 }}>
@@ -168,21 +181,21 @@ export default function BallroomWebsite() {
                 background: "rgba(255,255,255,0.04)",
                 color: "rgba(255,255,255,0.82)",
                 fontSize: 14,
-                marginBottom: 28,
+                marginBottom: isMobile ? 22 : 28,
               }}
             >
               <Trophy size={16} />
               Professional Ballroom Dancers · Performers · Coaches
             </div>
 
-            <div style={{ fontSize: 13, letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(255,255,255,0.58)" }}>
+            <div style={{ fontSize: isMobile ? 11 : 13, letterSpacing: isMobile ? "0.24em" : "0.35em", textTransform: "uppercase", color: "rgba(255,255,255,0.58)" }}>
               Stas & Marketa
             </div>
             <h1
               style={{
-                fontSize: "clamp(3rem, 8vw, 5.5rem)",
-                lineHeight: 0.95,
-                margin: "18px 0 20px",
+                fontSize: isMobile ? "clamp(2.7rem, 14vw, 4rem)" : "clamp(3rem, 8vw, 5.5rem)",
+                lineHeight: isMobile ? 0.98 : 0.95,
+                margin: isMobile ? "14px 0 16px" : "18px 0 20px",
                 letterSpacing: "-0.04em",
                 maxWidth: 720,
               }}
@@ -191,7 +204,7 @@ export default function BallroomWebsite() {
             </h1>
             <p
               style={{
-                fontSize: 20,
+                fontSize: isMobile ? 18 : 20,
                 lineHeight: 1.7,
                 color: "rgba(255,255,255,0.74)",
                 maxWidth: 720,
@@ -202,11 +215,11 @@ export default function BallroomWebsite() {
               choreography, destination events, weddings, and select collaborations.
             </p>
 
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 28 }}>
-              <CTAButton href="#contact">
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, max-content)", gap: 14, marginBottom: isMobile ? 22 : 28 }}>
+              <CTAButton href="#contact" fullWidth={isMobile}>
                 Book Us <ArrowRight size={16} />
               </CTAButton>
-              <CTAButton href="#services" secondary>
+              <CTAButton href="#services" secondary fullWidth={isMobile}>
                 Explore Services
               </CTAButton>
             </div>
@@ -214,7 +227,7 @@ export default function BallroomWebsite() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+                gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(180px, 1fr))",
                 gap: 14,
               }}
             >
@@ -246,13 +259,13 @@ export default function BallroomWebsite() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.15 }}
           >
-            <Card style={{ padding: 18 }}>
+            <Card style={{ padding: isMobile ? 12 : 18 }}>
               <div
                 style={{
                   borderRadius: 24,
                   border: "1px solid rgba(255,255,255,0.10)",
-                  minHeight: 620,
-                  padding: 24,
+                  minHeight: isMobile ? "auto" : 620,
+                  padding: isMobile ? 16 : 24,
                   background:
                     "linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
                   display: "flex",
@@ -268,20 +281,20 @@ export default function BallroomWebsite() {
                 <div>
                   <div
                     style={{
-                      minHeight: 360,
+                      minHeight: isMobile ? 240 : 360,
                       display: "grid",
                       placeItems: "center",
                       textAlign: "center",
                       borderRadius: 24,
                       border: "1px dashed rgba(255,255,255,0.16)",
                       background: "rgba(0,0,0,0.18)",
-                      padding: 28,
+                      padding: isMobile ? 14 : 28,
                     }}
                   >
                     <img src="/images/hero.jpg" alt="Stas & Marketa dancing" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 20 }} />
                   </div>
 
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginTop: 16 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 14, marginTop: 16 }}>
                     <div style={{ padding: 18, borderRadius: 20, border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.04)" }}>
                       <div style={{ fontSize: 30, fontWeight: 700 }}>Elite</div>
                       <div style={{ fontSize: 14, color: "rgba(255,255,255,0.58)", marginTop: 4 }}>Performance quality</div>
@@ -299,7 +312,7 @@ export default function BallroomWebsite() {
       </section>
 
       <section id="services">
-        <Wrapper style={{ paddingTop: 84, paddingBottom: 30 }}>
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 84, paddingBottom: isMobile ? 18 : 30 }}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} transition={{ duration: 0.6 }}>
             <div style={sectionTitle}>What we offer</div>
             <h2 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", margin: 0, letterSpacing: "-0.03em", maxWidth: 780 }}>
@@ -309,11 +322,12 @@ export default function BallroomWebsite() {
         </Wrapper>
 
         <Wrapper
+          isMobile={isMobile}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(240px, 1fr))",
             gap: 20,
-            paddingBottom: 84,
+            paddingBottom: isMobile ? 56 : 84,
           }}
         >
           {services.map((service, index) => {
@@ -327,7 +341,7 @@ export default function BallroomWebsite() {
                 variants={fadeUp}
                 transition={{ duration: 0.55, delay: index * 0.08 }}
               >
-                <Card style={{ padding: 28, minHeight: 260 }}>
+                <Card style={{ padding: isMobile ? 22 : 28, minHeight: isMobile ? "auto" : 260 }}>
                   <div
                     style={{
                       width: 52,
@@ -341,7 +355,7 @@ export default function BallroomWebsite() {
                   >
                     <Icon size={24} />
                   </div>
-                  <h3 style={{ fontSize: 28, marginTop: 22, marginBottom: 12 }}>{service.title}</h3>
+                  <h3 style={{ fontSize: isMobile ? 24 : 28, marginTop: 22, marginBottom: 12 }}>{service.title}</h3>
                   <p style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,255,255,0.68)" }}>{service.text}</p>
                 </Card>
               </motion.div>
@@ -352,13 +366,14 @@ export default function BallroomWebsite() {
 
       <section style={{ borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.03)" }}>
         <Wrapper
+          isMobile={isMobile}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: 28,
+            gridTemplateColumns: isTablet ? "1fr" : "minmax(0, 1.1fr) minmax(0, 0.9fr)",
+            gap: isMobile ? 24 : 28,
             alignItems: "center",
-            paddingTop: 84,
-            paddingBottom: 84,
+            paddingTop: isMobile ? 56 : 84,
+            paddingBottom: isMobile ? 56 : 84,
           }}
         >
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} variants={fadeUp} transition={{ duration: 0.6 }}>
@@ -366,7 +381,7 @@ export default function BallroomWebsite() {
             <h2 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", marginTop: 0, marginBottom: 18, letterSpacing: "-0.03em" }}>
               A partnership built on technique, trust, and striking performance.
             </h2>
-            <p style={{ fontSize: 18, lineHeight: 1.8, color: "rgba(255,255,255,0.70)", maxWidth: 640 }}>
+            <p style={{ fontSize: isMobile ? 16 : 18, lineHeight: 1.8, color: "rgba(255,255,255,0.70)", maxWidth: 640 }}>
               Stas Olarescu (Moldova) and Markéta Vlčková (Prague) are a professional Latin partnership combining elite competitive results with a refined artistic background.
 
 Stas began dancing at 7 and rose quickly through international ranks, becoming a Romanian National Amateur Champion before representing Singapore at major global events, including WDSF Grand Slams. He later transitioned to the professional circuit, competing at the world’s most prestigious events such as Blackpool, the UK Open, and World Championships.
@@ -378,7 +393,7 @@ Since forming their partnership in 2017, they have built an international career
 Together, they bring world-class competitive experience, international recognition, and a distinctive artistic identity to every performance and coaching experience.
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginTop: 28 }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginTop: 28 }}>
               <Card style={{ padding: 22 }}>
                 <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, marginBottom: 8 }}>Ideal for</div>
                 <div style={{ fontSize: 18, lineHeight: 1.6 }}>Weddings, galas, luxury events, showcases, intensives</div>
@@ -395,7 +410,7 @@ Together, they bring world-class competitive experience, international recogniti
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.7 }}
-            style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}
+            style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}
           >
             {[
               [Star, "Luxury event entertainment", "Sophisticated live performance for private and premium events."],
@@ -414,21 +429,22 @@ Together, they bring world-class competitive experience, international recogniti
       </section>
 
       <section>
-        <Wrapper style={{ paddingTop: 84, paddingBottom: 28 }}>
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 84, paddingBottom: isMobile ? 20 : 28 }}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} transition={{ duration: 0.6 }}>
             <div style={sectionTitle}>Gallery</div>
             <h2 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", margin: 0, letterSpacing: "-0.03em" }}>
-              Replace these placeholders with your strongest imagery.
+              Moments from performance, competition, and collaboration.
             </h2>
           </motion.div>
         </Wrapper>
 
         <Wrapper
+          isMobile={isMobile}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(240px, 1fr))",
             gap: 18,
-            paddingBottom: 84,
+            paddingBottom: isMobile ? 56 : 84,
           }}
         >
           {gallery.map((src, index) => (
@@ -444,7 +460,7 @@ Together, they bring world-class competitive experience, international recogniti
                 <img
                   src={src}
                   alt="Dance performance"
-                  style={{ width: "100%", height: 340, objectFit: "cover" }}
+                  style={{ width: "100%", height: isMobile ? 280 : 340, objectFit: "cover" }}
                 />
               </Card>
             </motion.div>
@@ -453,7 +469,7 @@ Together, they bring world-class competitive experience, international recogniti
       </section>
 
       <section>
-        <Wrapper style={{ paddingBottom: 28 }}>
+        <Wrapper isMobile={isMobile} style={{ paddingBottom: isMobile ? 20 : 28 }}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} transition={{ duration: 0.6 }}>
             <div style={sectionTitle}>Testimonials</div>
             <h2 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", margin: 0, letterSpacing: "-0.03em" }}>
@@ -463,11 +479,12 @@ Together, they bring world-class competitive experience, international recogniti
         </Wrapper>
 
         <Wrapper
+          isMobile={isMobile}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(260px, 1fr))",
             gap: 18,
-            paddingBottom: 84,
+            paddingBottom: isMobile ? 56 : 84,
           }}
         >
           {testimonials.map((item, index) => (
@@ -479,13 +496,13 @@ Together, they bring world-class competitive experience, international recogniti
               variants={fadeUp}
               transition={{ duration: 0.55, delay: index * 0.08 }}
             >
-              <Card style={{ padding: 28, minHeight: 250 }}>
+              <Card style={{ padding: isMobile ? 22 : 28, minHeight: isMobile ? "auto" : 250 }}>
                 <div style={{ display: "flex", gap: 4, opacity: 0.72, marginBottom: 18 }}>
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={16} fill="currentColor" />
                   ))}
                 </div>
-                <div style={{ fontSize: 20, lineHeight: 1.8, color: "rgba(255,255,255,0.78)" }}>“{item.quote}”</div>
+                <div style={{ fontSize: isMobile ? 18 : 20, lineHeight: 1.8, color: "rgba(255,255,255,0.78)" }}>“{item.quote}”</div>
                 <div style={{ marginTop: 24, fontSize: 13, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.46)" }}>
                   {item.name}
                 </div>
@@ -496,7 +513,7 @@ Together, they bring world-class competitive experience, international recogniti
       </section>
 
       <section id="contact">
-        <Wrapper style={{ paddingBottom: 96 }}>
+        <Wrapper isMobile={isMobile} style={{ paddingBottom: isMobile ? 64 : 96 }}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} transition={{ duration: 0.6 }}>
             <Card
               style={{
@@ -507,9 +524,9 @@ Together, they bring world-class competitive experience, international recogniti
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                  gap: 30,
-                  padding: 32,
+                  gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(300px, 1fr))",
+                  gap: isMobile ? 22 : 30,
+                  padding: isMobile ? 20 : 32,
                 }}
               >
                 <div>
@@ -517,7 +534,7 @@ Together, they bring world-class competitive experience, international recogniti
                   <h2 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", marginTop: 0, marginBottom: 18, letterSpacing: "-0.03em" }}>
                     Let’s create something unforgettable.
                   </h2>
-                  <p style={{ fontSize: 18, lineHeight: 1.8, color: "rgba(255,255,255,0.72)", maxWidth: 620 }}>
+                  <p style={{ fontSize: isMobile ? 16 : 18, lineHeight: 1.8, color: "rgba(255,255,255,0.72)", maxWidth: 620 }}>
                     Reach out for performances, choreography, workshops, private coaching, wedding dance services,
                     or destination bookings.
                   </p>
@@ -525,15 +542,29 @@ Together, they bring world-class competitive experience, international recogniti
                   <div style={{ display: "grid", gap: 14, marginTop: 26, color: "rgba(255,255,255,0.78)" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                       <Mail size={18} />
-                      <span>dance@stasmarketa.com</span>
+                      <a href="mailto:dance@stasmarketa.com" style={{ color: "inherit", textDecoration: "none", overflowWrap: "anywhere" }}>
+                        dance@stasmarketa.com
+                      </a>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                       <Phone size={18} />
-                      <span>Marketa: 617-678-3197 · Stas: 617-775-5365</span>
+                      <span style={{ lineHeight: 1.7 }}>
+                        <a href="tel:16176783197" style={{ color: "inherit", textDecoration: "none" }}>
+                          Marketa: 617-678-3197
+                        </a>
+                        <br />
+                        <a href="tel:16177755365" style={{ color: "inherit", textDecoration: "none" }}>
+                          Stas: 617-775-5365
+                        </a>
+                      </span>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                       <MapPin size={18} />
-                      <span>Boston, MA · Dance Fever Studio · 200 Wells Ave, Newton, MA 02459</span>
+                      <span style={{ lineHeight: 1.7 }}>
+                        Boston, MA · Dance Fever Studio
+                        <br />
+                        200 Wells Ave, Newton, MA 02459
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -546,7 +577,7 @@ Together, they bring world-class competitive experience, international recogniti
                   style={{
                     display: "grid",
                     gap: 14,
-                    padding: 24,
+                    padding: isMobile ? 18 : 24,
                     borderRadius: 24,
                     border: "1px solid rgba(255,255,255,0.10)",
                     background: "rgba(0,0,0,0.18)",
@@ -562,7 +593,7 @@ Together, they bring world-class competitive experience, international recogniti
                   <input name="name" placeholder="Your name" style={inputStyle} />
                   <input name="email" type="email" placeholder="Email" style={inputStyle} />
                   <input name="service" placeholder="Performance, lesson, wedding, or collaboration" style={inputStyle} />
-                  <textarea name="message" rows={5} placeholder="Tell us about your event or goals" style={{ ...inputStyle, resize: "vertical" }} />
+                  <textarea name="message" rows={isMobile ? 4 : 5} placeholder="Tell us about your event or goals" style={{ ...inputStyle, resize: "vertical" }} />
                   <button type="submit" style={submitStyle}>
                     Send Inquiry <ArrowRight size={16} />
                   </button>
@@ -580,6 +611,7 @@ Together, they bring world-class competitive experience, international recogniti
 }
 
 const inputStyle = {
+  appearance: "none",
   width: "100%",
   padding: "14px 16px",
   borderRadius: 16,
