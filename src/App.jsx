@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -51,14 +51,19 @@ const testimonials = [
   },
 ];
 
-const gallery = [
-  "/images/dance1.jpg",
-  "/images/dance2.jpg",
-  "/images/dance3.jpg",
-  "/images/dance4.jpg",
-  "/images/dance5.jpg",
-  "/images/dance6.jpg",
+const galleryImageNames = [
+  "dance1.jpg",
+  "dance2.jpg",
+  "dance3.jpg",
+  "dance4.jpg",
+  "dance5.jpg",
+  "dance6.jpg",
+  // Add more filenames from public/images here:
+  // "dance7.jpg",
+  // "dance8.jpg",
 ];
+
+const gallery = galleryImageNames.map((name) => `/images/${name}`);
 
 const achievements = [
   "Finalists of the WDC European Championships Professional Latin 2025",
@@ -191,6 +196,7 @@ function AchievementItem({ text, isMobile }) {
 }
 
 export default function BallroomWebsite() {
+  const galleryRef = useRef(null);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200,
   );
@@ -203,6 +209,18 @@ export default function BallroomWebsite() {
 
   const isMobile = windowWidth < 768;
   const isTablet = windowWidth < 1024;
+
+  const galleryScrollAmount = isMobile ? 300 : 420;
+
+  const scrollGallery = (direction) => {
+    if (!galleryRef.current) return;
+    galleryRef.current.scrollBy({
+      left: direction === "next" ? galleryScrollAmount : -galleryScrollAmount,
+      behavior: "smooth",
+    });
+  };
+
+  const hasGalleryImages = gallery.length > 0;
 
   return (
     <div
@@ -594,44 +612,78 @@ export default function BallroomWebsite() {
             transition={{ duration: 0.6 }}
           >
             <div style={sectionTitle}>Gallery</div>
-            <h2 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", margin: 0, letterSpacing: "-0.03em" }}>
-              Moments from performance, competition, and collaboration.
-            </h2>
+            <div
+              style={{
+                display: "flex",
+                alignItems: isMobile ? "flex-start" : "center",
+                justifyContent: "space-between",
+                gap: 16,
+                flexDirection: isMobile ? "column" : "row",
+              }}
+            >
+              <h2 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", margin: 0, letterSpacing: "-0.03em" }}>
+                Moments from performance, competition, and collaboration.
+              </h2>
+
+              <div style={{ display: "flex", gap: 10 }}>
+                <button type="button" onClick={() => scrollGallery("prev")} style={galleryNavButton}>
+                  ←
+                </button>
+                <button type="button" onClick={() => scrollGallery("next")} style={galleryNavButton}>
+                  →
+                </button>
+              </div>
+            </div>
           </motion.div>
         </Wrapper>
 
-        <Wrapper
-          isMobile={isMobile}
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: 18,
-            paddingBottom: isMobile ? 56 : 84,
-          }}
-        >
-          {gallery.map((src, index) => (
-            <motion.div
-              key={src}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeUp}
-              transition={{ duration: 0.55, delay: index * 0.08 }}
+        <Wrapper isMobile={isMobile} style={{ paddingBottom: isMobile ? 56 : 84 }}>
+          {hasGalleryImages ? (
+            <div
+              ref={galleryRef}
+              style={{
+                display: "grid",
+                gridAutoFlow: "column",
+                gridAutoColumns: isMobile ? "84%" : "minmax(320px, 36%)",
+                gap: 18,
+                overflowX: "auto",
+                scrollSnapType: "x mandatory",
+                paddingBottom: 8,
+                scrollbarWidth: "thin",
+              }}
             >
-              <Card style={{ overflow: "hidden" }}>
-                <img
-                  src={src}
-                  alt="Dance performance"
-                  style={{
-                    width: "100%",
-                    height: isMobile ? 280 : 340,
-                    objectFit: "cover",
-                    display: "block",
-                  }}
-                />
-              </Card>
-            </motion.div>
-          ))}
+              {gallery.map((src, index) => (
+                <motion.div
+                  key={src}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.2 }}
+                  variants={fadeUp}
+                  transition={{ duration: 0.55, delay: index * 0.05 }}
+                  style={{ scrollSnapAlign: "start" }}
+                >
+                  <Card style={{ overflow: "hidden" }}>
+                    <img
+                      src={src}
+                      alt={`Dance performance ${index + 1}`}
+                      style={{
+                        width: "100%",
+                        height: isMobile ? 420 : 520,
+                        objectFit: "cover",
+                        display: "block",
+                      }}
+                    />
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <Card style={{ padding: 24 }}>
+              <div style={{ color: "rgba(255,255,255,0.72)", lineHeight: 1.7 }}>
+                Add image filenames to <strong>galleryImageNames</strong> at the top of this file and make sure the files are inside <strong>public/images</strong>.
+              </div>
+            </Card>
+          )}
         </Wrapper>
       </section>
 
@@ -847,6 +899,17 @@ const inputStyle = {
   fontSize: 15,
   outline: "none",
   boxSizing: "border-box",
+};
+
+const galleryNavButton = {
+  width: 46,
+  height: 46,
+  borderRadius: 999,
+  border: "1px solid rgba(212,175,55,0.28)",
+  background: "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(212,175,55,0.10))",
+  color: "white",
+  cursor: "pointer",
+  fontSize: 20,
 };
 
 const submitStyle = {
