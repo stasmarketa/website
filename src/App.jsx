@@ -64,7 +64,7 @@ const sectionTitle = {
   fontSize: "0.85rem",
   letterSpacing: "0.28em",
   textTransform: "uppercase",
-  color: "rgba(255,255,255,0.55)",
+  color: "rgba(212,175,55,0.82)",
   marginBottom: "12px",
 };
 
@@ -94,10 +94,12 @@ function Card({ children, style }) {
   return (
     <div
       style={{
-        background: "rgba(255,255,255,0.05)",
-        border: "1px solid rgba(255,255,255,0.10)",
+        background: "rgba(255,255,255,0.08)",
+        backdropFilter: "blur(18px)",
+        WebkitBackdropFilter: "blur(18px)",
+        border: "1px solid rgba(255,255,255,0.18)",
         borderRadius: 28,
-        boxShadow: "0 20px 60px rgba(0,0,0,0.22)",
+        boxShadow: "0 20px 60px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.25)",
         ...style,
       }}
     >
@@ -120,11 +122,11 @@ function CTAButton({ children, href = "#contact", secondary = false, fullWidth =
         fontSize: 16,
         fontWeight: 600,
         textDecoration: "none",
-        border: secondary ? "1px solid rgba(255,255,255,0.18)" : "1px solid transparent",
+        border: secondary ? "1px solid rgba(212,175,55,0.28)" : "1px solid transparent",
         color: "white",
-        background: secondary ? "transparent" : "white",
+        background: secondary ? "transparent" : "linear-gradient(135deg, #f6e7bf 0%, #d4af37 55%, #b8891f 100%)",
         colorScheme: "dark",
-        color: secondary ? "white" : "#111111",
+        color: secondary ? "white" : "#17120a",
         minWidth: fullWidth ? "100%" : 180,
         width: fullWidth ? "100%" : "auto",
       }}
@@ -151,7 +153,7 @@ export default function BallroomWebsite() {
       style={{
         minHeight: "100vh",
         background:
-          "radial-gradient(circle at top, rgba(255,255,255,0.14), transparent 30%), linear-gradient(180deg, #111111 0%, #0a0a0a 100%)",
+          "radial-gradient(circle at 20% 10%, rgba(120,119,198,0.25), transparent 40%), radial-gradient(circle at 80% 0%, rgba(255,120,200,0.18), transparent 40%), linear-gradient(180deg, #0b0f1a 0%, #0a0a0f 100%)",
         color: "white",
         fontFamily:
           'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
@@ -179,9 +181,9 @@ export default function BallroomWebsite() {
                 gap: 10,
                 padding: isMobile ? "10px 12px" : "10px 14px",
                 borderRadius: 999,
-                border: "1px solid rgba(255,255,255,0.12)",
-                background: "rgba(255,255,255,0.04)",
-                color: "rgba(255,255,255,0.82)",
+                border: "1px solid rgba(212,175,55,0.22)",
+                background: "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(212,175,55,0.08))",
+                color: "rgba(255,248,230,0.88)",
                 fontSize: isMobile ? 12 : 14,
                 lineHeight: 1.5,
                 marginBottom: isMobile ? 22 : 28,
@@ -194,7 +196,7 @@ export default function BallroomWebsite() {
               Professional Ballroom Dancers · Performers · Coaches
             </div>
 
-            <div style={{ fontSize: isMobile ? 11 : 13, letterSpacing: isMobile ? "0.24em" : "0.35em", textTransform: "uppercase", color: "rgba(255,255,255,0.58)" }}>
+            <div style={{ fontSize: isMobile ? 11 : 13, letterSpacing: isMobile ? "0.24em" : "0.35em", textTransform: "uppercase", color: "rgba(235,215,160,0.78)" }}>
               Stas & Marketa
             </div>
             <h1
@@ -247,8 +249,8 @@ export default function BallroomWebsite() {
                   style={{
                     padding: isMobile ? 14 : 16,
                     borderRadius: 20,
-                    border: "1px solid rgba(255,255,255,0.10)",
-                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(212,175,55,0.18)",
+                    background: "linear-gradient(135deg, rgba(255,255,255,0.06), rgba(212,175,55,0.06))",
                     color: "rgba(255,255,255,0.72)",
                     lineHeight: 1.6,
                     fontSize: isMobile ? 13 : 14,
@@ -279,7 +281,7 @@ export default function BallroomWebsite() {
                   justifyContent: "space-between",
                 }}
               >
-                <div style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: isMobile ? "wrap" : "nowrap", color: "rgba(255,255,255,0.55)", fontSize: isMobile ? 12 : 14 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: isMobile ? "wrap" : "nowrap", color: "rgba(224,197,126,0.82)", fontSize: isMobile ? 12 : 14 }}>
                   <span>Featured Partnership</span>
                   <span>International Travel</span>
                 </div>
@@ -293,7 +295,7 @@ export default function BallroomWebsite() {
                       textAlign: "center",
                       borderRadius: 24,
                       border: "1px dashed rgba(255,255,255,0.16)",
-                      background: "rgba(0,0,0,0.18)",
+                      background: "rgba(20,20,30,0.35)",
                       padding: isMobile ? 14 : 28,
                     }}
                   >
@@ -301,11 +303,11 @@ export default function BallroomWebsite() {
                   </div>
 
                   <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 14, marginTop: 16 }}>
-                    <div style={{ padding: 18, borderRadius: 20, border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.04)" }}>
+                    <div style={{ padding: 18, borderRadius: 20, border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.06)" }}>
                       <div style={{ fontSize: 30, fontWeight: 700 }}>Elite</div>
                       <div style={{ fontSize: 14, color: "rgba(255,255,255,0.58)", marginTop: 4 }}>Performance quality</div>
                     </div>
-                    <div style={{ padding: 18, borderRadius: 20, border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.04)" }}>
+                    <div style={{ padding: 18, borderRadius: 20, border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.06)" }}>
                       <div style={{ fontSize: 30, fontWeight: 700 }}>Global</div>
                       <div style={{ fontSize: 14, color: "rgba(255,255,255,0.58)", marginTop: 4 }}>Available for travel</div>
                     </div>
@@ -355,8 +357,8 @@ export default function BallroomWebsite() {
                       borderRadius: 18,
                       display: "grid",
                       placeItems: "center",
-                      background: "rgba(255,255,255,0.09)",
-                      border: "1px solid rgba(255,255,255,0.10)",
+                      background: "linear-gradient(135deg, rgba(255,255,255,0.10), rgba(212,175,55,0.12))",
+                      border: "1px solid rgba(212,175,55,0.22)",
                     }}
                   >
                     <Icon size={24} />
@@ -505,11 +507,11 @@ Together, they bring world-class competitive experience, international recogniti
               <Card style={{ padding: isMobile ? 22 : 28, minHeight: isMobile ? "auto" : 250 }}>
                 <div style={{ display: "flex", gap: 4, opacity: 0.72, marginBottom: 18 }}>
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} fill="currentColor" />
+                    <Star key={i} size={16} fill="#d4af37" color="#d4af37" />
                   ))}
                 </div>
                 <div style={{ fontSize: isMobile ? 18 : 20, lineHeight: 1.8, color: "rgba(255,255,255,0.78)" }}>“{item.quote}”</div>
-                <div style={{ marginTop: 24, fontSize: 13, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.46)" }}>
+                <div style={{ marginTop: 24, fontSize: 13, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(224,197,126,0.72)" }}>
                   {item.name}
                 </div>
               </Card>
@@ -524,7 +526,7 @@ Together, they bring world-class competitive experience, international recogniti
             <Card
               style={{
                 overflow: "hidden",
-                background: "linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04))",
+                background: "linear-gradient(135deg, rgba(255,255,255,0.10), rgba(212,175,55,0.10))",
               }}
             >
               <div
@@ -591,7 +593,7 @@ Together, they bring world-class competitive experience, international recogniti
                     padding: isMobile ? 18 : 24,
                     borderRadius: 24,
                     border: "1px solid rgba(255,255,255,0.10)",
-                    background: "rgba(0,0,0,0.18)",
+                    background: "rgba(20,20,30,0.35)",
                   }}
                 >
                   <input type="hidden" name="form-name" value="booking" />
@@ -642,8 +644,8 @@ const submitStyle = {
   padding: "15px 18px",
   borderRadius: 18,
   border: "none",
-  background: "white",
-  color: "#111111",
+  background: "linear-gradient(135deg, #f6e7bf 0%, #d4af37 55%, #b8891f 100%)",
+  color: "#17120a",
   fontWeight: 700,
   fontSize: 15,
   cursor: "pointer",
