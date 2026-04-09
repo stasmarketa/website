@@ -51,6 +51,7 @@ const testimonials = [
   },
 ];
 
+
 const galleryImageNames = [
   "dance1.jpg",
   "dance2.jpg",
@@ -58,9 +59,16 @@ const galleryImageNames = [
   "dance4.jpg",
   "dance5.jpg",
   "dance6.jpg",
-  // Add more filenames from public/images here:
-  // "dance7.jpg",
-  // "dance8.jpg",
+
+  // 👇 ADD YOUR NEW IMAGES HERE
+  "new1.jpg",
+  "new2.jpg",
+  "new3.jpg",
+  "new4.jpg",
+  "new5.jpg",
+  "new6.jpg",
+  "new7.jpg",
+  "new8.jpg",
 ];
 
 const gallery = galleryImageNames.map((name) => `/images/${name}`);
