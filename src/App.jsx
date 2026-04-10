@@ -849,6 +849,7 @@ export default function BallroomWebsite() {
                 <form
                   name="booking"
                   method="POST"
+                  action="/success/"
                   data-netlify="true"
                   netlify-honeypot="bot-field"
                   style={{
@@ -859,7 +860,8 @@ export default function BallroomWebsite() {
                     border: "1px solid rgba(255,255,255,0.10)",
                     background: "rgba(20,20,30,0.35)",
                   }}
-                >
+                 >
+                
                   <input type="hidden" name="form-name" value="booking" />
                   <p style={{ display: "none" }}>
                     <label>
