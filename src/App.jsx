@@ -75,15 +75,12 @@ const gallery = galleryImageNames.map((name) => `/images/${name}`);
 
 const achievements = [
   "Finalists of the WDC European Championships Professional Latin 2025",
-  "Winners of the British Open Professional Latin Rising Stars 2024",
+  "Winners of the British Open Professional Rising Stars Latin 2024",
   "Semifinalists of the British Open Professional Latin 2024",
-  "5th place at the World Professional Latin Showdance Championships 2024",
-  "Semifinalists of the Dutch Open Assen Professional Latin 2024",
-  "4th place at the British Open Professional Latin Rising Stars 2023",
-  "5th place at the International Championships Latin Rising Stars 2023",
+  "Finalists of the World Professional Latin Showdance Championships 2024",
+  "Finalists of the British Open Professional Latin Rising Stars 2023",
+  "Finalists of the International Championships Rising Stars Latin 2023",
   "Winners of the Dutch Open Assen Professional Latin Rising Stars 2022",
-  "Semifinalists of the British Open Professional Latin Rising Stars 2022",
-  "Semifinalists of the UK Open Professional Latin Rising Stars 2022",
   "Semifinalists of the European Professional Latin Championships 2022 and 2024",
   "Semifinalists of the World Professional Latin Championships 2022",
 ];
