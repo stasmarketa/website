@@ -859,35 +859,71 @@ export default function BallroomWebsite() {
                     borderRadius: 24,
                     border: "1px solid rgba(255,255,255,0.10)",
                     background: "rgba(20,20,30,0.35)",
+                    backdropFilter: "blur(18px)",
+                    WebkitBackdropFilter: "blur(18px)",
                   }}
-                 >
-                
+                >
+                  {/* REQUIRED hidden inputs */}
                   <input type="hidden" name="form-name" value="booking" />
+
                   <p style={{ display: "none" }}>
                     <label>
                       Don’t fill this out if you’re human: <input name="bot-field" />
                     </label>
                   </p>
 
-                  <input name="name" placeholder="Your name" style={inputStyle} />
-                  <input name="email" type="email" placeholder="Email" style={inputStyle} />
+                  {/* NAME */}
                   <input
-                    name="service"
-                    placeholder="Performance, lesson, wedding, or collaboration"
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    required
                     style={inputStyle}
                   />
+
+                  {/* EMAIL */}
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your email"
+                    required
+                    style={inputStyle}
+                  />
+
+                  {/* SERVICE */}
+                  <input
+                    type="text"
+                    name="service"
+                    placeholder="Type of inquiry (lessons, performance, wedding...)"
+                    style={inputStyle}
+                  />
+
+                  {/* MESSAGE */}
                   <textarea
                     name="message"
-                    rows={isMobile ? 4 : 5}
-                    placeholder="Tell us about your event or goals"
-                    style={{ ...inputStyle, resize: "vertical" }}
+                    placeholder="Tell us more about your request"
+                    rows="4"
+                    required
+                    style={inputStyle}
                   />
-                  <button type="submit" style={submitStyle}>
-                    Send Inquiry <ArrowRight size={16} />
+
+                  {/* BUTTON */}
+                  <button
+                    type="submit"
+                    style={{
+                      marginTop: 10,
+                      padding: "14px 18px",
+                      borderRadius: 18,
+                      border: "none",
+                      fontWeight: 600,
+                      cursor: "pointer",
+                      background:
+                        "linear-gradient(135deg, #f6e7bf 0%, #d4af37 55%, #b8891f 100%)",
+                      color: "#17120a",
+                    }}
+                  >
+                    Send Inquiry →
                   </button>
-                  <div style={{ fontSize: 13, color: "rgba(255,255,255,0.46)", lineHeight: 1.7 }}>
-                    This form is set up with Netlify form attributes so it can be captured during deployment.
-                  </div>
                 </form>
               </div>
             </Card>
