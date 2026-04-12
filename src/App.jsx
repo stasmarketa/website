@@ -69,7 +69,7 @@ const achievements = [
   "Finalists of the World Professional Latin Showdance Championships 2024",
   "Finalists of the British Open Professional Latin Rising Stars 2023",
   "Finalists of the International Championships Rising Stars Latin 2023",
-  "Winners of the Dutch Open Assen Professional Latin Rising Stars 2022",
+  "Winners of the Dutch Open Assen Professional Rising Stars Latin 2022",
   "Semifinalists of the European Professional Latin Championships 2022 and 2024",
   "Semifinalists of the World Professional Latin Championships 2022",
 ];
@@ -107,10 +107,10 @@ function Wrapper({ children, style, isMobile }) {
     <div
       style={{
         width: "100%",
-        maxWidth: 1320,
+        maxWidth: 1240,
         margin: "0 auto",
-        paddingLeft: isMobile ? 20 : 36,
-        paddingRight: isMobile ? 20 : 36,
+        paddingLeft: isMobile ? 18 : 36,
+        paddingRight: isMobile ? 18 : 36,
         ...style,
       }}
     >
@@ -119,15 +119,15 @@ function Wrapper({ children, style, isMobile }) {
   );
 }
 
-function SectionEyebrow({ children }) {
+function SectionLabel({ children, dark = false }) {
   return (
     <div
       style={{
         fontSize: 12,
-        letterSpacing: "0.28em",
+        letterSpacing: "0.26em",
         textTransform: "uppercase",
-        color: "rgba(255,255,255,0.44)",
-        marginBottom: 16,
+        color: dark ? "rgba(0,0,0,0.42)" : "rgba(255,255,255,0.48)",
+        marginBottom: 14,
       }}
     >
       {children}
@@ -135,32 +135,22 @@ function SectionEyebrow({ children }) {
   );
 }
 
-function OutlineButton({ children, href = "#", fullWidth = false }) {
+function Frame({ children, style }) {
   return (
-    <a
-      href={href}
+    <div
       style={{
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        minWidth: fullWidth ? "100%" : 170,
-        width: fullWidth ? "100%" : "auto",
-        height: 54,
-        border: "1px solid rgba(255,255,255,0.18)",
-        color: "rgba(255,255,255,0.92)",
-        textDecoration: "none",
-        fontSize: 14,
-        letterSpacing: "0.1em",
-        textTransform: "uppercase",
-        background: "transparent",
+        background: "rgba(11,11,13,0.94)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        boxShadow: "0 24px 80px rgba(0,0,0,0.42)",
+        ...style,
       }}
     >
       {children}
-    </a>
+    </div>
   );
 }
 
-function SolidButton({ children, href = "#", fullWidth = false }) {
+function PrimaryButton({ children, href = "#contact", fullWidth = false }) {
   return (
     <a
       href={href}
@@ -169,16 +159,15 @@ function SolidButton({ children, href = "#", fullWidth = false }) {
         alignItems: "center",
         justifyContent: "center",
         gap: 10,
-        minWidth: fullWidth ? "100%" : 170,
-        width: fullWidth ? "100%" : "auto",
+        width: fullWidth ? "100%" : 190,
         height: 54,
         background: "#8c1217",
-        color: "#f8f0ea",
+        color: "#f7f2ed",
         textDecoration: "none",
+        border: "1px solid rgba(255,255,255,0.08)",
         fontSize: 14,
         letterSpacing: "0.1em",
         textTransform: "uppercase",
-        border: "1px solid rgba(255,255,255,0.08)",
       }}
     >
       {children}
@@ -186,18 +175,27 @@ function SolidButton({ children, href = "#", fullWidth = false }) {
   );
 }
 
-function FramedCard({ children, style }) {
+function SecondaryButton({ children, href = "#services", fullWidth = false }) {
   return (
-    <div
+    <a
+      href={href}
       style={{
-        background: "rgba(9,9,11,0.92)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        boxShadow: "0 24px 80px rgba(0,0,0,0.45)",
-        ...style,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: fullWidth ? "100%" : 190,
+        height: 54,
+        background: "transparent",
+        color: "rgba(255,255,255,0.92)",
+        textDecoration: "none",
+        border: "1px solid rgba(255,255,255,0.18)",
+        fontSize: 14,
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
       }}
     >
       {children}
-    </div>
+    </a>
   );
 }
 
@@ -206,14 +204,14 @@ function AchievementRow({ text, isMobile }) {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: isMobile ? "20px 1fr" : "26px 1fr",
-        gap: 14,
-        padding: isMobile ? "14px 0" : "16px 0",
+        gridTemplateColumns: isMobile ? "18px 1fr" : "22px 1fr",
+        gap: 12,
+        padding: isMobile ? "12px 0" : "14px 0",
         borderBottom: "1px solid rgba(255,255,255,0.08)",
       }}
     >
-      <div style={{ color: "#8c1217", fontSize: 18, lineHeight: 1 }}>✦</div>
-      <div style={{ fontSize: isMobile ? 15 : 17, lineHeight: 1.6, color: "rgba(255,255,255,0.86)" }}>
+      <div style={{ color: "#8c1217", fontSize: 16, lineHeight: 1 }}>✦</div>
+      <div style={{ color: "rgba(255,255,255,0.84)", lineHeight: 1.6, fontSize: isMobile ? 14 : 15 }}>
         {text}
       </div>
     </div>
@@ -249,36 +247,32 @@ export default function BallroomWebsite() {
       style={{
         minHeight: "100vh",
         background:
-          "radial-gradient(circle at 85% 12%, rgba(140,18,23,0.30), transparent 20%), radial-gradient(circle at 12% 88%, rgba(122,12,18,0.22), transparent 24%), linear-gradient(180deg, #0a0a0a 0%, #111111 40%, #141414 100%)",
+          "radial-gradient(circle at 85% 12%, rgba(140,18,23,0.24), transparent 20%), radial-gradient(circle at 10% 86%, rgba(110,14,18,0.16), transparent 24%), linear-gradient(180deg, #0a0a0a 0%, #111111 48%, #151515 100%)",
         color: "#f7f2ed",
         fontFamily:
           'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
       }}
     >
       <section>
-        <Wrapper
-          isMobile={isMobile}
-          style={{
-            paddingTop: isMobile ? 18 : 28,
-            paddingBottom: isMobile ? 56 : 84,
-          }}
-        >
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 18 : 26, paddingBottom: isMobile ? 54 : 82 }}>
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginBottom: isMobile ? 20 : 28,
-              borderBottom: "1px solid rgba(255,255,255,0.10)",
-              paddingBottom: 16,
               gap: 16,
               flexWrap: isMobile ? "wrap" : "nowrap",
+              borderBottom: "1px solid rgba(255,255,255,0.10)",
+              paddingBottom: 16,
+              marginBottom: isMobile ? 18 : 28,
             }}
           >
             <div
               style={{
+                width: isMobile ? "100%" : "auto",
+                textAlign: isMobile ? "center" : "left",
                 fontFamily: '"Times New Roman", Georgia, serif',
-                fontSize: isMobile ? 28 : 34,
+                fontSize: isMobile ? 26 : 34,
                 letterSpacing: "0.05em",
               }}
             >
@@ -286,13 +280,15 @@ export default function BallroomWebsite() {
             </div>
             <div
               style={{
+                width: isMobile ? "100%" : "auto",
                 display: "flex",
-                gap: isMobile ? 12 : 24,
+                justifyContent: isMobile ? "center" : "flex-end",
+                gap: isMobile ? 14 : 24,
+                flexWrap: "wrap",
                 fontSize: 11,
                 letterSpacing: "0.22em",
                 textTransform: "uppercase",
                 color: "rgba(255,255,255,0.62)",
-                flexWrap: "wrap",
               }}
             >
               <a href="#about" style={navLink}>About</a>
@@ -305,13 +301,13 @@ export default function BallroomWebsite() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: isTablet ? "1fr" : "1.05fr 0.95fr",
-              gap: isMobile ? 24 : 28,
+              gridTemplateColumns: isTablet ? "1fr" : "1.02fr 0.98fr",
+              gap: isMobile ? 22 : 28,
               alignItems: "stretch",
             }}
           >
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7 }}>
-              <FramedCard
+              <Frame
                 style={{
                   padding: isMobile ? 22 : 34,
                   minHeight: isMobile ? "auto" : 720,
@@ -325,83 +321,94 @@ export default function BallroomWebsite() {
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
+                      justifyContent: isMobile ? "center" : "flex-start",
                       gap: 10,
                       padding: "10px 14px",
                       border: "1px solid rgba(255,255,255,0.12)",
                       color: "rgba(255,255,255,0.72)",
                       fontSize: 12,
-                      letterSpacing: "0.08em",
-                      marginBottom: 30,
+                      letterSpacing: "0.06em",
+                      marginBottom: 28,
+                      width: isMobile ? "100%" : "auto",
+                      boxSizing: "border-box",
+                      textAlign: "center",
                     }}
                   >
                     <Trophy size={15} /> Professional Ballroom Dancers · Performers · Coaches
                   </div>
 
-                  <SectionEyebrow>Stas &amp; Marketa</SectionEyebrow>
-                  <h1
-                    style={{
-                      margin: 0,
-                      fontFamily: '"Times New Roman", Georgia, serif',
-                      fontSize: isMobile ? "clamp(3rem, 14vw, 4.7rem)" : "clamp(4.4rem, 8vw, 8rem)",
-                      lineHeight: 0.9,
-                      fontWeight: 400,
-                      letterSpacing: "-0.04em",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    Ballroom artistry with elegance, intensity, and unforgettable presence.
-                  </h1>
+                  <div style={{ textAlign: isMobile ? "center" : "left" }}>
+                    <SectionLabel>Stas &amp; Marketa</SectionLabel>
+                    <h1
+                      style={{
+                        margin: 0,
+                        fontFamily: '"Times New Roman", Georgia, serif',
+                        fontSize: isMobile ? "clamp(3rem, 14vw, 4.6rem)" : "clamp(4.4rem, 8vw, 7.4rem)",
+                        lineHeight: 0.9,
+                        fontWeight: 400,
+                        letterSpacing: "-0.04em",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      Ballroom artistry with elegance, intensity, and unforgettable presence.
+                    </h1>
 
-                  <p
-                    style={{
-                      marginTop: 26,
-                      marginBottom: 0,
-                      maxWidth: 620,
-                      color: "rgba(255,255,255,0.72)",
-                      fontSize: isMobile ? 18 : 21,
-                      lineHeight: 1.65,
-                    }}
-                  >
-                    We are a professional ballroom partnership available for luxury performances, coaching,
-                    choreography, destination events, weddings, and select collaborations.
-                  </p>
+                    <p
+                      style={{
+                        marginTop: 24,
+                        marginBottom: 0,
+                        maxWidth: 620,
+                        color: "rgba(255,255,255,0.72)",
+                        fontSize: isMobile ? 17 : 21,
+                        lineHeight: 1.7,
+                        marginLeft: isMobile ? "auto" : 0,
+                        marginRight: isMobile ? "auto" : 0,
+                      }}
+                    >
+                      We are a professional ballroom partnership available for luxury performances, coaching,
+                      choreography, destination events, weddings, and select collaborations.
+                    </p>
+                  </div>
                 </div>
 
-                <div style={{ marginTop: 36 }}>
+                <div style={{ marginTop: 34 }}>
                   <div
                     style={{
                       display: "grid",
-                      gridTemplateColumns: isMobile ? "1fr" : "170px 170px",
+                      gridTemplateColumns: isMobile ? "1fr" : "190px 190px",
                       gap: 14,
+                      justifyContent: isMobile ? "stretch" : "start",
                       marginBottom: 28,
                     }}
                   >
-                    <SolidButton href="#contact" fullWidth={isMobile}>
+                    <PrimaryButton href="#contact" fullWidth={isMobile}>
                       Book us <ArrowRight size={15} />
-                    </SolidButton>
-                    <OutlineButton href="#services" fullWidth={isMobile}>
+                    </PrimaryButton>
+                    <SecondaryButton href="#services" fullWidth={isMobile}>
                       Explore services
-                    </OutlineButton>
+                    </SecondaryButton>
                   </div>
 
                   <div
                     style={{
                       display: "grid",
                       gridTemplateColumns: isMobile ? "1fr" : "repeat(3, minmax(0, 1fr))",
-                      gap: 0,
+                      gap: isMobile ? 12 : 0,
                       borderTop: "1px solid rgba(255,255,255,0.10)",
+                      textAlign: isMobile ? "center" : "left",
                     }}
                   >
                     {[
                       "Available for performances, coaching, and events",
                       "Based in Boston, MA · Dance Fever Studio",
                       "Ideal for weddings, showcases, and premium entertainment",
-                    ].map((item) => (
+                    ].map((item, index) => (
                       <div
                         key={item}
                         style={{
-                          padding: isMobile ? "16px 0" : "18px 18px 0 0",
-                          borderRight: isMobile ? "none" : "1px solid rgba(255,255,255,0.08)",
+                          padding: isMobile ? "16px 0 0" : "18px 18px 0 0",
+                          borderRight:
+                            !isMobile && index < 2 ? "1px solid rgba(255,255,255,0.08)" : "none",
                           color: "rgba(255,255,255,0.64)",
                           lineHeight: 1.7,
                           fontSize: 14,
@@ -412,7 +419,7 @@ export default function BallroomWebsite() {
                     ))}
                   </div>
                 </div>
-              </FramedCard>
+              </Frame>
             </motion.div>
 
             <motion.div
@@ -423,22 +430,21 @@ export default function BallroomWebsite() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateRows: isTablet ? "auto auto" : "1.2fr 0.8fr",
+                  gridTemplateRows: isTablet ? "auto auto" : "1.15fr 0.85fr",
                   gap: isMobile ? 18 : 22,
                   minHeight: isMobile ? "auto" : 720,
                 }}
               >
-                <FramedCard style={{ overflow: "hidden", position: "relative" }}>
+                <Frame style={{ overflow: "hidden", position: "relative" }}>
                   <img
                     src="/images/hero.jpg"
                     alt="Stas & Marketa dancing"
                     style={{
                       width: "100%",
                       height: "100%",
-                      minHeight: isMobile ? 380 : 460,
+                      minHeight: isMobile ? 360 : 440,
                       objectFit: "cover",
                       display: "block",
-                      filter: "contrast(1.02) saturate(0.94)",
                     }}
                   />
                   <div
@@ -446,60 +452,61 @@ export default function BallroomWebsite() {
                       position: "absolute",
                       inset: 0,
                       background:
-                        "linear-gradient(180deg, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.10) 35%, rgba(0,0,0,0.72) 100%)",
+                        "linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.12) 38%, rgba(0,0,0,0.70) 100%)",
                     }}
                   />
                   <div
                     style={{
                       position: "absolute",
-                      left: isMobile ? 18 : 28,
-                      right: isMobile ? 18 : 28,
-                      bottom: isMobile ? 18 : 28,
+                      left: isMobile ? 18 : 26,
+                      right: isMobile ? 18 : 26,
+                      bottom: isMobile ? 18 : 24,
                       display: "flex",
+                      flexDirection: isMobile ? "column" : "row",
                       justifyContent: "space-between",
-                      alignItems: "end",
-                      gap: 14,
+                      alignItems: isMobile ? "center" : "end",
+                      gap: 12,
+                      textAlign: isMobile ? "center" : "left",
                     }}
                   >
                     <div>
-                      <div style={{ ...eyebrowLight, marginBottom: 10 }}>Featured image</div>
+                      <div style={overlayLabel}>Featured image</div>
                       <div
                         style={{
                           fontFamily: '"Times New Roman", Georgia, serif',
-                          fontSize: isMobile ? 30 : 42,
-                          lineHeight: 1,
+                          fontSize: isMobile ? 30 : 40,
+                          lineHeight: 0.95,
                           textTransform: "uppercase",
                         }}
                       >
                         Achievements
                       </div>
                     </div>
-                    <div style={{ ...eyebrowLight, textAlign: "right" }}>WDC · British Open · Blackpool</div>
+                    <div style={{ ...overlayLabel, textAlign: isMobile ? "center" : "right" }}>
+                      WDC · British Open · Blackpool
+                    </div>
                   </div>
-                </FramedCard>
+                </Frame>
 
-                <FramedCard style={{ padding: isMobile ? 20 : 26 }}>
+                <Frame style={{ padding: isMobile ? 20 : 26 }}>
                   <div
                     style={{
                       display: "grid",
                       gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-                      gap: isMobile ? 0 : 18,
+                      gap: isMobile ? 6 : 20,
+                      textAlign: isMobile ? "left" : "left",
                     }}
                   >
-                    <div style={{ paddingRight: isMobile ? 0 : 12 }}>
-                      <div style={eyebrowLight}>Top results</div>
+                    <div>
+                      <div style={overlayLabel}>Top results</div>
                       {achievements.slice(0, 6).map((achievement) => (
                         <AchievementRow key={achievement} text={achievement} isMobile={isMobile} />
                       ))}
                     </div>
-                    <div style={{ paddingRight: isMobile ? 0 : 12 }}>
-                      <div style={eyebrowLight}>Additional highlights</div>
-                      {achievements.slice(6).map((achievement) => (
-                        <AchievementRow key={achievement} text={achievement} isMobile={isMobile} />
-                      ))}
+                    <div>
                     </div>
                   </div>
-                </FramedCard>
+                </Frame>
               </div>
             </motion.div>
           </div>
@@ -507,18 +514,19 @@ export default function BallroomWebsite() {
       </section>
 
       <section id="services">
-        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 28 : 54, paddingBottom: isMobile ? 56 : 90 }}>
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 28 : 54, paddingBottom: isMobile ? 56 : 88 }}>
           <div
             style={{
               display: "grid",
               gridTemplateColumns: isTablet ? "1fr" : "0.85fr 1.15fr",
-              gap: isMobile ? 20 : 32,
+              gap: isMobile ? 18 : 32,
               alignItems: "end",
               marginBottom: 28,
+              textAlign: isMobile ? "center" : "left",
             }}
           >
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} transition={{ duration: 0.6 }}>
-              <SectionEyebrow>What we offer</SectionEyebrow>
+              <SectionLabel>What we offer</SectionLabel>
               <h2
                 style={{
                   margin: 0,
@@ -533,9 +541,8 @@ export default function BallroomWebsite() {
                 Performance, coaching, choreography, and elevated event experiences.
               </h2>
             </motion.div>
-            <div style={{ color: "rgba(255,255,255,0.64)", lineHeight: 1.8, fontSize: 16, maxWidth: 560 }}>
-              Crafted with a more editorial, monochrome-luxury direction while keeping the same structure,
-              content, and booking functionality.
+            <div style={{ color: "rgba(255,255,255,0.64)", lineHeight: 1.8, fontSize: 16, maxWidth: 560, marginLeft: isMobile ? "auto" : 0, marginRight: isMobile ? "auto" : 0 }}>
+              A cleaner luxury direction: centered, calm, elegant, and easier to read on mobile while keeping the editorial mood.
             </div>
           </div>
 
@@ -558,7 +565,11 @@ export default function BallroomWebsite() {
                   viewport={{ once: true, amount: 0.2 }}
                   variants={fadeUp}
                   transition={{ duration: 0.55, delay: index * 0.08 }}
-                  style={{ borderRight: "1px solid rgba(255,255,255,0.10)", borderBottom: "1px solid rgba(255,255,255,0.10)" }}
+                  style={{
+                    borderRight: isMobile ? "none" : "1px solid rgba(255,255,255,0.10)",
+                    borderBottom: "1px solid rgba(255,255,255,0.10)",
+                    textAlign: isMobile ? "center" : "left",
+                  }}
                 >
                   <div style={{ padding: isMobile ? 22 : 30, minHeight: isMobile ? "auto" : 280 }}>
                     <div
@@ -570,6 +581,8 @@ export default function BallroomWebsite() {
                         placeItems: "center",
                         marginBottom: 24,
                         color: "#8c1217",
+                        marginLeft: isMobile ? "auto" : 0,
+                        marginRight: isMobile ? "auto" : 0,
                       }}
                     >
                       <Icon size={24} />
@@ -586,7 +599,7 @@ export default function BallroomWebsite() {
                     >
                       {service.title}
                     </h3>
-                    <p style={{ marginTop: 18, color: "rgba(255,255,255,0.66)", lineHeight: 1.8, fontSize: 16 }}>
+                    <p style={{ marginTop: 18, color: "rgba(255,255,255,0.66)", lineHeight: 1.8, fontSize: 16, maxWidth: isMobile ? 500 : "none", marginLeft: isMobile ? "auto" : 0, marginRight: isMobile ? "auto" : 0 }}>
                       {service.text}
                     </p>
                   </div>
@@ -598,7 +611,7 @@ export default function BallroomWebsite() {
       </section>
 
       <section id="about" style={{ background: "#f2efeb", color: "#171717" }}>
-        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 90, paddingBottom: isMobile ? 56 : 90 }}>
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 88, paddingBottom: isMobile ? 56 : 88 }}>
           <div
             style={{
               display: "grid",
@@ -608,31 +621,17 @@ export default function BallroomWebsite() {
             }}
           >
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} variants={fadeUp} transition={{ duration: 0.6 }}>
-              <SectionEyebrow>About us</SectionEyebrow>
+              <SectionLabel dark>About us</SectionLabel>
               <div style={{ display: "grid", gap: 18 }}>
                 <img
                   src="/images/dance3.jpg"
                   alt="Stas and Marketa portrait"
-                  style={{ width: "100%", height: isMobile ? 360 : 470, objectFit: "cover", display: "block" }}
+                  style={{ width: "100%", height: isMobile ? 340 : 470, objectFit: "cover", display: "block" }}
                 />
-                <div
-                  style={{
-                    padding: isMobile ? 20 : 24,
-                    border: "1px solid rgba(0,0,0,0.12)",
-                    background: "rgba(255,255,255,0.72)",
-                  }}
-                >
-                  <div style={{ color: "rgba(0,0,0,0.42)", fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 8 }}>
-                    Ideal for
-                  </div>
-                  <div style={{ fontSize: 18, lineHeight: 1.7 }}>
-                    Weddings, galas, luxury events, showcases, intensives
-                  </div>
-                </div>
               </div>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} variants={fadeUp} transition={{ duration: 0.7 }}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} variants={fadeUp} transition={{ duration: 0.7 }} style={{ textAlign: isMobile ? "center" : "left" }}>
               <h2
                 style={{
                   marginTop: 0,
@@ -691,18 +690,19 @@ export default function BallroomWebsite() {
       </section>
 
       <section id="gallery">
-        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 86, paddingBottom: isMobile ? 56 : 90 }}>
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 86, paddingBottom: isMobile ? 56 : 88 }}>
           <div
             style={{
               display: "grid",
               gridTemplateColumns: isTablet ? "1fr" : "0.85fr 1.15fr",
-              gap: isMobile ? 20 : 32,
+              gap: isMobile ? 18 : 32,
               alignItems: "end",
-              marginBottom: 26,
+              marginBottom: 24,
+              textAlign: isMobile ? "center" : "left",
             }}
           >
             <div>
-              <SectionEyebrow>Gallery</SectionEyebrow>
+              <SectionLabel>Gallery</SectionLabel>
               <h2
                 style={{
                   margin: 0,
@@ -720,7 +720,7 @@ export default function BallroomWebsite() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: isMobile ? "flex-start" : "space-between",
+                justifyContent: isMobile ? "center" : "space-between",
                 gap: 16,
                 flexWrap: isMobile ? "wrap" : "nowrap",
               }}
@@ -762,7 +762,7 @@ export default function BallroomWebsite() {
                   <img
                     src={src}
                     alt={`Dance performance ${index + 1}`}
-                    style={{ width: "100%", height: isMobile ? 460 : 560, objectFit: "cover", display: "block" }}
+                    style={{ width: "100%", height: isMobile ? 440 : 560, objectFit: "cover", display: "block" }}
                   />
                 </div>
               </motion.div>
@@ -772,16 +772,18 @@ export default function BallroomWebsite() {
       </section>
 
       <section style={{ background: "#f2efeb", color: "#171717" }}>
-        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 86, paddingBottom: isMobile ? 56 : 90 }}>
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 86, paddingBottom: isMobile ? 56 : 88 }}>
           <div
             style={{
               display: "grid",
               gridTemplateColumns: isTablet ? "1fr" : "0.82fr 1.18fr",
-              gap: isMobile ? 22 : 34,
+              gap: isMobile ? 18 : 34,
+              alignItems: "end",
+              textAlign: isMobile ? "center" : "left",
             }}
           >
             <div>
-              <SectionEyebrow>Testimonials</SectionEyebrow>
+              <SectionLabel dark>Testimonials</SectionLabel>
               <h2
                 style={{
                   margin: 0,
@@ -795,8 +797,8 @@ export default function BallroomWebsite() {
                 Trusted to create moments people remember.
               </h2>
             </div>
-            <div style={{ color: "rgba(0,0,0,0.66)", lineHeight: 1.8, fontSize: 16, maxWidth: 500 }}>
-              Kept fully functional, but shifted into a more editorial, monochrome, art-direction-led visual language.
+            <div style={{ color: "rgba(0,0,0,0.66)", lineHeight: 1.8, fontSize: 16, maxWidth: 500, marginLeft: isMobile ? "auto" : 0, marginRight: isMobile ? "auto" : 0 }}>
+              The same testimonials and credibility, presented in a calmer, more centered luxury layout.
             </div>
           </div>
 
@@ -818,10 +820,14 @@ export default function BallroomWebsite() {
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeUp}
                 transition={{ duration: 0.55, delay: index * 0.08 }}
-                style={{ borderRight: "1px solid rgba(0,0,0,0.12)", borderBottom: "1px solid rgba(0,0,0,0.12)" }}
+                style={{
+                  borderRight: isMobile ? "none" : "1px solid rgba(0,0,0,0.12)",
+                  borderBottom: "1px solid rgba(0,0,0,0.12)",
+                  textAlign: isMobile ? "center" : "left",
+                }}
               >
                 <div style={{ padding: isMobile ? 22 : 28, minHeight: isMobile ? "auto" : 280 }}>
-                  <div style={{ display: "flex", gap: 4, marginBottom: 20 }}>
+                  <div style={{ display: "flex", gap: 4, marginBottom: 20, justifyContent: isMobile ? "center" : "flex-start" }}>
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} size={16} fill="#8c1217" color="#8c1217" />
                     ))}
@@ -846,10 +852,11 @@ export default function BallroomWebsite() {
               display: "grid",
               gridTemplateColumns: isTablet ? "1fr" : "0.82fr 1.18fr",
               gap: isMobile ? 22 : 34,
+              textAlign: isMobile ? "center" : "left",
             }}
           >
             <div>
-              <SectionEyebrow>Book us</SectionEyebrow>
+              <SectionLabel>Book us</SectionLabel>
               <h2
                 style={{
                   marginTop: 0,
@@ -863,12 +870,12 @@ export default function BallroomWebsite() {
               >
                 Let’s create something unforgettable.
               </h2>
-              <p style={{ fontSize: isMobile ? 16 : 18, lineHeight: 1.9, color: "rgba(255,255,255,0.70)", maxWidth: 520 }}>
+              <p style={{ fontSize: isMobile ? 16 : 18, lineHeight: 1.9, color: "rgba(255,255,255,0.70)", maxWidth: 520, marginLeft: isMobile ? "auto" : 0, marginRight: isMobile ? "auto" : 0 }}>
                 Reach out for performances, choreography, workshops, private coaching, wedding dance services,
                 or destination bookings.
               </p>
 
-              <div style={{ display: "grid", gap: 14, marginTop: 30, color: "rgba(255,255,255,0.78)" }}>
+              <div style={{ display: "grid", gap: 14, marginTop: 30, color: "rgba(255,255,255,0.78)", justifyItems: isMobile ? "center" : "start" }}>
                 <div style={contactRow}>
                   <Mail size={18} />
                   <a href="mailto:dance@stasmarketa.com" style={contactLink}>dance@stasmarketa.com</a>
@@ -945,7 +952,7 @@ const navLink = {
   textDecoration: "none",
 };
 
-const eyebrowLight = {
+const overlayLabel = {
   fontSize: 11,
   letterSpacing: "0.24em",
   textTransform: "uppercase",
