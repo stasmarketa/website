@@ -57,6 +57,7 @@ const galleryImageNames = [
   "dance3.jpg",
   "dance4.jpg",
   "dance5.jpg",
+  "dance6.jpg",
   "dance7.jpg",
   "dance8.jpg",
   "dance9.jpg",
@@ -352,7 +353,7 @@ export default function BallroomWebsite() {
                       style={{
                         margin: 0,
                         fontFamily: '"Times New Roman", Georgia, serif',
-                        fontSize: isMobile ? "clamp(2.05rem, 9vw, 3.2rem)" : "clamp(4.4rem, 8vw, 7.4rem)",
+                        fontSize: isMobile ? "clamp(2.05rem, 9vw, 3.2rem)" : "clamp(3rem, 5.2vw, 5.2rem)",
                         lineHeight: isMobile ? 0.94 : 0.9,
                         wordBreak: "normal",
                         overflowWrap: "anywhere",
@@ -550,9 +551,6 @@ export default function BallroomWebsite() {
                 Performance, coaching, choreography, and elevated event experiences.
               </h2>
             </motion.div>
-            <div style={{ color: "rgba(255,255,255,0.64)", lineHeight: 1.8, fontSize: 16, maxWidth: 560, marginLeft: isMobile ? "auto" : 0, marginRight: isMobile ? "auto" : 0 }}>
-              A cleaner luxury direction: centered, calm, elegant, and easier to read on mobile while keeping the editorial mood.
-            </div>
           </div>
 
           <div
@@ -635,7 +633,7 @@ export default function BallroomWebsite() {
                 <img
                   src="/images/dance3.jpg"
                   alt="Stas and Marketa portrait"
-                  style={{ width: "100%", height: isMobile ? 340 : 470, objectFit: "cover", display: "block" }}
+                  style={{ width: "100%", height: "auto", objectFit: "cover", display: "block" }} 
                 />
               </div>
             </motion.div>
@@ -805,9 +803,6 @@ export default function BallroomWebsite() {
               >
                 Trusted to create moments people remember.
               </h2>
-            </div>
-            <div style={{ color: "rgba(0,0,0,0.66)", lineHeight: 1.8, fontSize: 16, maxWidth: 500, marginLeft: isMobile ? "auto" : 0, marginRight: isMobile ? "auto" : 0 }}>
-              The same testimonials and credibility, presented in a calmer, more centered luxury layout.
             </div>
           </div>
 
