@@ -311,16 +311,16 @@ export default function BallroomWebsite() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: isTablet ? "1fr" : "1.02fr 0.98fr",
-              gap: isMobile ? 22 : 28,
+              gridTemplateColumns: isTablet ? "1fr" : "0.95fr 1.05fr",
+              gap: isMobile ? 22 : 36,
               alignItems: "stretch",
             }}
           >
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7 }}>
               <Frame
                 style={{
-                  padding: isMobile ? 16 : 34,
-                  minHeight: isMobile ? "auto" : 720,
+                  padding: isMobile ? 16 : 42,
+                  minHeight: isMobile ? "auto" : 600,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
@@ -338,7 +338,7 @@ export default function BallroomWebsite() {
                       color: "rgba(255,255,255,0.72)",
                       fontSize: isMobile ? 10 : 12,
                       letterSpacing: isMobile ? "0.03em" : "0.06em",
-                      marginBottom: isMobile ? 20 : 28,
+                      marginBottom: isMobile ? 20 : 36,
                       width: isMobile ? "100%" : "auto",
                       boxSizing: "border-box",
                       textAlign: "center",
@@ -347,31 +347,48 @@ export default function BallroomWebsite() {
                     <Trophy size={15} /> Professional Ballroom Dancers · Performers · Coaches
                   </div>
 
-                  <div style={{ textAlign: isMobile ? "center" : "left" }}>
+                  <div
+                    style={{
+                      textAlign: isMobile ? "center" : "left",
+                      maxWidth: isMobile ? "100%" : 500,
+                    }}
+                  >
                     <SectionLabel>Stas &amp; Marketa</SectionLabel>
                     <h1
                       style={{
                         margin: 0,
                         fontFamily: '"Times New Roman", Georgia, serif',
-                        fontSize: isMobile ? "clamp(2.05rem, 9vw, 3.2rem)" : "clamp(3rem, 5.2vw, 5.2rem)",
-                        lineHeight: isMobile ? 0.94 : 0.9,
-                        wordBreak: "normal",
-                        overflowWrap: "anywhere",
+                        fontSize: isMobile ? "clamp(2.05rem, 9vw, 3.2rem)" : "clamp(2.35rem, 3.1vw, 4rem)",
+                        lineHeight: isMobile ? 0.94 : 0.88,
+                        maxWidth: isMobile ? "100%" : 500,
+                        wordBreak: "keep-all",
+                        overflowWrap: "normal",
+                        textWrap: "balance",
                         fontWeight: 400,
-                        letterSpacing: "-0.04em",
+                        letterSpacing: "-0.05em",
                         textTransform: "uppercase",
                       }}
                     >
-                      Ballroom artistry with elegance, intensity, and unforgettable presence.
+                      <>
+                        Ballroom artistry
+                        <br />
+                        with elegance,
+                        <br />
+                        intensity, and
+                        <br />
+                        unforgettable
+                        <br />
+                        presence.
+                      </>
                     </h1>
 
                     <p
                       style={{
-                        marginTop: 24,
+                        marginTop: 28,
                         marginBottom: 0,
-                        maxWidth: 620,
+                        maxWidth: isMobile ? 620 : 520,
                         color: "rgba(255,255,255,0.72)",
-                        fontSize: isMobile ? 15 : 21,
+                        fontSize: isMobile ? 15 : 16.5,
                         lineHeight: 1.7,
                         marginLeft: isMobile ? "auto" : 0,
                         marginRight: isMobile ? "auto" : 0,
@@ -383,7 +400,7 @@ export default function BallroomWebsite() {
                   </div>
                 </div>
 
-                <div style={{ marginTop: 34 }}>
+                <div style={{ marginTop: isMobile ? 34 : 46 }}>
                   <div
                     style={{
                       display: "grid",
@@ -444,7 +461,7 @@ export default function BallroomWebsite() {
                   display: "grid",
                   gridTemplateRows: isTablet ? "auto auto" : "1.15fr 0.85fr",
                   gap: isMobile ? 18 : 22,
-                  minHeight: isMobile ? "auto" : 720,
+                  minHeight: isMobile ? "auto" : 600,
                 }}
               >
                 <Frame style={{ overflow: "hidden", position: "relative" }}>
@@ -454,7 +471,7 @@ export default function BallroomWebsite() {
                     style={{
                       width: "100%",
                       height: "100%",
-                      minHeight: isMobile ? 360 : 440,
+                      minHeight: isMobile ? 360 : 430,
                       objectFit: "cover",
                       display: "block",
                     }}
@@ -464,7 +481,7 @@ export default function BallroomWebsite() {
                       position: "absolute",
                       inset: 0,
                       background:
-                        "linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.12) 38%, rgba(0,0,0,0.70) 100%)",
+                        "linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.14) 38%, rgba(0,0,0,0.78) 100%)",
                     }}
                   />
                   <div
@@ -486,7 +503,7 @@ export default function BallroomWebsite() {
                       <div
                         style={{
                           fontFamily: '"Times New Roman", Georgia, serif',
-                          fontSize: isMobile ? 30 : 40,
+                          fontSize: isMobile ? 30 : 44,
                           lineHeight: 0.95,
                           textTransform: "uppercase",
                         }}
@@ -500,12 +517,12 @@ export default function BallroomWebsite() {
                   </div>
                 </Frame>
 
-                <Frame style={{ padding: isMobile ? 20 : 26 }}>
+                <Frame style={{ padding: isMobile ? 20 : 28, background: "linear-gradient(180deg, rgba(11,11,13,0.96) 0%, rgba(17,17,20,0.96) 100%)" }}>
                   <div
                     style={{
                       display: "grid",
                       gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-                      gap: isMobile ? 6 : 20,
+                      gap: isMobile ? 6 : 28,
                       textAlign: isMobile ? "left" : "left",
                     }}
                   >
@@ -541,7 +558,7 @@ export default function BallroomWebsite() {
                 style={{
                   margin: 0,
                   fontFamily: '"Times New Roman", Georgia, serif',
-                  fontSize: "clamp(2.4rem, 5.6vw, 5rem)",
+                  fontSize: "clamp(2.2rem, 4.2vw, 4rem)",
                   fontWeight: 400,
                   lineHeight: 0.95,
                   letterSpacing: "-0.04em",
@@ -633,7 +650,7 @@ export default function BallroomWebsite() {
                 <img
                   src="/images/dance3.jpg"
                   alt="Stas and Marketa portrait"
-                  style={{ width: "100%", height: "auto", objectFit: "cover", display: "block" }} 
+                  style={{ width: "100%", height: "auto", objectFit: "cover", display: "block" }}
                 />
               </div>
             </motion.div>
@@ -644,7 +661,7 @@ export default function BallroomWebsite() {
                   marginTop: 0,
                   marginBottom: 20,
                   fontFamily: '"Times New Roman", Georgia, serif',
-                  fontSize: "clamp(2.2rem, 5vw, 4.4rem)",
+                  fontSize: "clamp(2rem, 3.8vw, 3.8rem)",
                   lineHeight: 0.96,
                   fontWeight: 400,
                   letterSpacing: "-0.04em",
