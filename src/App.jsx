@@ -51,7 +51,6 @@ const testimonials = [
   },
 ];
 
-
 const galleryImageNames = [
   "dance1.jpg",
   "dance2.jpg",
@@ -59,16 +58,6 @@ const galleryImageNames = [
   "dance4.jpg",
   "dance5.jpg",
   "dance6.jpg",
-
-  // 👇 ADD YOUR NEW IMAGES HERE
-  "new1.jpg",
-  "new2.jpg",
-  "new3.jpg",
-  "new4.jpg",
-  "new5.jpg",
-  "new6.jpg",
-  "new7.jpg",
-  "new8.jpg",
 ];
 
 const gallery = galleryImageNames.map((name) => `/images/${name}`);
@@ -108,14 +97,6 @@ const featureCards = [
   },
 ];
 
-const sectionTitle = {
-  fontSize: "0.85rem",
-  letterSpacing: "0.28em",
-  textTransform: "uppercase",
-  color: "rgba(212,175,55,0.82)",
-  marginBottom: "12px",
-};
-
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0 },
@@ -126,10 +107,10 @@ function Wrapper({ children, style, isMobile }) {
     <div
       style={{
         width: "100%",
-        maxWidth: 1200,
+        maxWidth: 1320,
         margin: "0 auto",
-        paddingLeft: isMobile ? 16 : 24,
-        paddingRight: isMobile ? 16 : 24,
+        paddingLeft: isMobile ? 20 : 36,
+        paddingRight: isMobile ? 20 : 36,
         ...style,
       }}
     >
@@ -138,17 +119,15 @@ function Wrapper({ children, style, isMobile }) {
   );
 }
 
-function Card({ children, style }) {
+function SectionEyebrow({ children }) {
   return (
     <div
       style={{
-        background: "rgba(255,255,255,0.08)",
-        backdropFilter: "blur(18px)",
-        WebkitBackdropFilter: "blur(18px)",
-        border: "1px solid rgba(255,255,255,0.16)",
-        borderRadius: 28,
-        boxShadow: "0 20px 60px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.18)",
-        ...style,
+        fontSize: 12,
+        letterSpacing: "0.28em",
+        textTransform: "uppercase",
+        color: "rgba(255,255,255,0.44)",
+        marginBottom: 16,
       }}
     >
       {children}
@@ -156,7 +135,32 @@ function Card({ children, style }) {
   );
 }
 
-function CTAButton({ children, href = "#contact", secondary = false, fullWidth = false }) {
+function OutlineButton({ children, href = "#", fullWidth = false }) {
+  return (
+    <a
+      href={href}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minWidth: fullWidth ? "100%" : 170,
+        width: fullWidth ? "100%" : "auto",
+        height: 54,
+        border: "1px solid rgba(255,255,255,0.18)",
+        color: "rgba(255,255,255,0.92)",
+        textDecoration: "none",
+        fontSize: 14,
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+        background: "transparent",
+      }}
+    >
+      {children}
+    </a>
+  );
+}
+
+function SolidButton({ children, href = "#", fullWidth = false }) {
   return (
     <a
       href={href}
@@ -165,19 +169,16 @@ function CTAButton({ children, href = "#contact", secondary = false, fullWidth =
         alignItems: "center",
         justifyContent: "center",
         gap: 10,
-        padding: "15px 22px",
-        borderRadius: 18,
-        fontSize: 16,
-        fontWeight: 600,
-        textDecoration: "none",
-        border: secondary ? "1px solid rgba(212,175,55,0.28)" : "1px solid transparent",
-        background: secondary
-          ? "transparent"
-          : "linear-gradient(135deg, #f6e7bf 0%, #d4af37 55%, #b8891f 100%)",
-        color: secondary ? "white" : "#17120a",
-        minWidth: fullWidth ? "100%" : 180,
+        minWidth: fullWidth ? "100%" : 170,
         width: fullWidth ? "100%" : "auto",
-        boxSizing: "border-box",
+        height: 54,
+        background: "#8c1217",
+        color: "#f8f0ea",
+        textDecoration: "none",
+        fontSize: 14,
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+        border: "1px solid rgba(255,255,255,0.08)",
       }}
     >
       {children}
@@ -185,17 +186,36 @@ function CTAButton({ children, href = "#contact", secondary = false, fullWidth =
   );
 }
 
-function AchievementItem({ text, isMobile }) {
+function FramedCard({ children, style }) {
   return (
     <div
       style={{
-        padding: 18,
-        borderRadius: 20,
-        border: "1px solid rgba(212,175,55,0.18)",
-        background: "linear-gradient(135deg, rgba(255,255,255,0.06), rgba(212,175,55,0.06))",
+        background: "rgba(9,9,11,0.92)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        boxShadow: "0 24px 80px rgba(0,0,0,0.45)",
+        ...style,
       }}
     >
-      <div style={{ fontSize: isMobile ? 18 : 20, fontWeight: 600 }}>{text}</div>
+      {children}
+    </div>
+  );
+}
+
+function AchievementRow({ text, isMobile }) {
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: isMobile ? "20px 1fr" : "26px 1fr",
+        gap: 14,
+        padding: isMobile ? "14px 0" : "16px 0",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
+      <div style={{ color: "#8c1217", fontSize: 18, lineHeight: 1 }}>✦</div>
+      <div style={{ fontSize: isMobile ? 15 : 17, lineHeight: 1.6, color: "rgba(255,255,255,0.86)" }}>
+        {text}
+      </div>
     </div>
   );
 }
@@ -213,9 +233,8 @@ export default function BallroomWebsite() {
   }, []);
 
   const isMobile = windowWidth < 768;
-  const isTablet = windowWidth < 1024;
-
-  const galleryScrollAmount = isMobile ? 300 : 420;
+  const isTablet = windowWidth < 1100;
+  const galleryScrollAmount = isMobile ? 300 : 460;
 
   const scrollGallery = (direction) => {
     if (!galleryRef.current) return;
@@ -225,719 +244,731 @@ export default function BallroomWebsite() {
     });
   };
 
-  const hasGalleryImages = gallery.length > 0;
-
   return (
     <div
       style={{
         minHeight: "100vh",
         background:
-          "radial-gradient(circle at 20% 10%, rgba(120,119,198,0.25), transparent 40%), radial-gradient(circle at 80% 0%, rgba(255,120,200,0.16), transparent 40%), radial-gradient(circle at 50% 100%, rgba(212,175,55,0.10), transparent 35%), linear-gradient(180deg, #0b0f1a 0%, #0a0a0f 100%)",
-        color: "white",
+          "radial-gradient(circle at 85% 12%, rgba(140,18,23,0.30), transparent 20%), radial-gradient(circle at 12% 88%, rgba(122,12,18,0.22), transparent 24%), linear-gradient(180deg, #0a0a0a 0%, #111111 40%, #141414 100%)",
+        color: "#f7f2ed",
         fontFamily:
           'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
       }}
     >
-      <section style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+      <section>
         <Wrapper
           isMobile={isMobile}
           style={{
-            display: "grid",
-            gridTemplateColumns: isTablet ? "1fr" : "repeat(2, minmax(0, 1fr))",
-            gap: isMobile ? 28 : 40,
-            alignItems: "center",
-            paddingTop: isMobile ? 24 : 40,
-            paddingBottom: isMobile ? 40 : 64,
+            paddingTop: isMobile ? 18 : 28,
+            paddingBottom: isMobile ? 56 : 84,
           }}
         >
-          <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: isMobile ? 20 : 28,
+              borderBottom: "1px solid rgba(255,255,255,0.10)",
+              paddingBottom: 16,
+              gap: 16,
+              flexWrap: isMobile ? "wrap" : "nowrap",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: '"Times New Roman", Georgia, serif',
+                fontSize: isMobile ? 28 : 34,
+                letterSpacing: "0.05em",
+              }}
+            >
+              STAS &amp; MARKETA
+            </div>
             <div
               style={{
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexWrap: "wrap",
-                gap: 10,
-                padding: isMobile ? "10px 12px" : "10px 14px",
-                borderRadius: 999,
-                border: "1px solid rgba(212,175,55,0.25)",
-                background: "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(212,175,55,0.08))",
-                color: "rgba(255,248,230,0.88)",
-                fontSize: isMobile ? 12 : 14,
-                lineHeight: 1.5,
-                marginBottom: isMobile ? 22 : 28,
-                width: "100%",
-                boxSizing: "border-box",
-                textAlign: "center",
-              }}
-            >
-              <Trophy size={16} />
-              Professional Ballroom Dancers · Performers · Coaches
-            </div>
-
-            <div
-              style={{
-                fontSize: isMobile ? 11 : 13,
-                letterSpacing: isMobile ? "0.24em" : "0.35em",
+                gap: isMobile ? 12 : 24,
+                fontSize: 11,
+                letterSpacing: "0.22em",
                 textTransform: "uppercase",
-                color: "rgba(235,215,160,0.78)",
-                textAlign: isMobile ? "center" : "left",
+                color: "rgba(255,255,255,0.62)",
+                flexWrap: "wrap",
               }}
             >
-              Stas & Marketa
+              <a href="#about" style={navLink}>About</a>
+              <a href="#services" style={navLink}>Services</a>
+              <a href="#gallery" style={navLink}>Gallery</a>
+              <a href="#contact" style={navLink}>Contact</a>
             </div>
+          </div>
 
-            <h1
-              style={{
-                fontSize: isMobile ? "clamp(2.35rem, 12vw, 3.5rem)" : "clamp(3rem, 8vw, 5.5rem)",
-                lineHeight: isMobile ? 0.98 : 0.95,
-                margin: isMobile ? "14px 0 16px" : "18px 0 20px",
-                letterSpacing: "-0.04em",
-                maxWidth: 720,
-                textAlign: isMobile ? "center" : "left",
-              }}
-            >
-              Ballroom artistry with elegance, intensity, and unforgettable presence.
-            </h1>
-
-            <p
-              style={{
-                fontSize: isMobile ? 16 : 20,
-                lineHeight: 1.7,
-                color: "rgba(255,255,255,0.74)",
-                maxWidth: 720,
-                marginBottom: isMobile ? 20 : 28,
-                textAlign: isMobile ? "center" : "left",
-              }}
-            >
-              We are a professional ballroom partnership available for luxury performances, coaching,
-              choreography, destination events, weddings, and select collaborations.
-            </p>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "repeat(2, max-content)",
-                gap: 14,
-                marginBottom: isMobile ? 22 : 28,
-              }}
-            >
-              <CTAButton href="#contact" fullWidth={isMobile}>
-                Book Us <ArrowRight size={16} />
-              </CTAButton>
-              <CTAButton href="#services" secondary fullWidth={isMobile}>
-                Explore Services
-              </CTAButton>
-            </div>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(180px, 1fr))",
-                gap: 14,
-              }}
-            >
-              {[
-                "Available for performances, coaching, and events",
-                "Based in Boston, MA · Dance Fever Studio",
-                "Ideal for weddings, showcases, and premium entertainment",
-              ].map((item) => (
-                <div
-                  key={item}
-                  style={{
-                    padding: isMobile ? 14 : 16,
-                    borderRadius: 20,
-                    border: "1px solid rgba(212,175,55,0.18)",
-                    background: "linear-gradient(135deg, rgba(255,255,255,0.06), rgba(212,175,55,0.06))",
-                    color: "rgba(255,255,255,0.72)",
-                    lineHeight: 1.6,
-                    fontSize: isMobile ? 13 : 14,
-                    textAlign: isMobile ? "center" : "left",
-                  }}
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: isTablet ? "1fr" : "1.05fr 0.95fr",
+              gap: isMobile ? 24 : 28,
+              alignItems: "stretch",
+            }}
           >
-            <Card style={{ padding: isMobile ? 12 : 18 }}>
-              <div
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7 }}>
+              <FramedCard
                 style={{
-                  borderRadius: 24,
-                  border: "1px solid rgba(255,255,255,0.10)",
-                  minHeight: isMobile ? "auto" : 620,
-                  padding: isMobile ? 16 : 24,
-                  background:
-                    "linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))",
+                  padding: isMobile ? 22 : 34,
+                  minHeight: isMobile ? "auto" : 720,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
                 }}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    gap: 10,
-                    color: "rgba(224,197,126,0.82)",
-                    fontSize: isMobile ? 12 : 14,
-                  }}
-                >
-                  <span>Achievements</span>
-                </div>
-
                 <div>
-                  <div style={{ borderRadius: 24, overflow: "hidden", marginTop: 12 }}>
-                    <img
-                      src="/images/hero.jpg"
-                      alt="Stas & Marketa dancing"
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        maxHeight: isMobile ? 320 : 520,
-                        objectFit: "cover",
-                        display: "block",
-                      }}
-                    />
+                  <div
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 10,
+                      padding: "10px 14px",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      color: "rgba(255,255,255,0.72)",
+                      fontSize: 12,
+                      letterSpacing: "0.08em",
+                      marginBottom: 30,
+                    }}
+                  >
+                    <Trophy size={15} /> Professional Ballroom Dancers · Performers · Coaches
                   </div>
 
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 14, marginTop: 16 }}>
-                    {achievements.map((achievement) => (
-                      <AchievementItem key={achievement} text={achievement} isMobile={isMobile} />
+                  <SectionEyebrow>Stas &amp; Marketa</SectionEyebrow>
+                  <h1
+                    style={{
+                      margin: 0,
+                      fontFamily: '"Times New Roman", Georgia, serif',
+                      fontSize: isMobile ? "clamp(3rem, 14vw, 4.7rem)" : "clamp(4.4rem, 8vw, 8rem)",
+                      lineHeight: 0.9,
+                      fontWeight: 400,
+                      letterSpacing: "-0.04em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Ballroom artistry with elegance, intensity, and unforgettable presence.
+                  </h1>
+
+                  <p
+                    style={{
+                      marginTop: 26,
+                      marginBottom: 0,
+                      maxWidth: 620,
+                      color: "rgba(255,255,255,0.72)",
+                      fontSize: isMobile ? 18 : 21,
+                      lineHeight: 1.65,
+                    }}
+                  >
+                    We are a professional ballroom partnership available for luxury performances, coaching,
+                    choreography, destination events, weddings, and select collaborations.
+                  </p>
+                </div>
+
+                <div style={{ marginTop: 36 }}>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isMobile ? "1fr" : "170px 170px",
+                      gap: 14,
+                      marginBottom: 28,
+                    }}
+                  >
+                    <SolidButton href="#contact" fullWidth={isMobile}>
+                      Book us <ArrowRight size={15} />
+                    </SolidButton>
+                    <OutlineButton href="#services" fullWidth={isMobile}>
+                      Explore services
+                    </OutlineButton>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isMobile ? "1fr" : "repeat(3, minmax(0, 1fr))",
+                      gap: 0,
+                      borderTop: "1px solid rgba(255,255,255,0.10)",
+                    }}
+                  >
+                    {[
+                      "Available for performances, coaching, and events",
+                      "Based in Boston, MA · Dance Fever Studio",
+                      "Ideal for weddings, showcases, and premium entertainment",
+                    ].map((item) => (
+                      <div
+                        key={item}
+                        style={{
+                          padding: isMobile ? "16px 0" : "18px 18px 0 0",
+                          borderRight: isMobile ? "none" : "1px solid rgba(255,255,255,0.08)",
+                          color: "rgba(255,255,255,0.64)",
+                          lineHeight: 1.7,
+                          fontSize: 14,
+                        }}
+                      >
+                        {item}
+                      </div>
                     ))}
                   </div>
                 </div>
+              </FramedCard>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.15 }}
+            >
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateRows: isTablet ? "auto auto" : "1.2fr 0.8fr",
+                  gap: isMobile ? 18 : 22,
+                  minHeight: isMobile ? "auto" : 720,
+                }}
+              >
+                <FramedCard style={{ overflow: "hidden", position: "relative" }}>
+                  <img
+                    src="/images/hero.jpg"
+                    alt="Stas & Marketa dancing"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      minHeight: isMobile ? 380 : 460,
+                      objectFit: "cover",
+                      display: "block",
+                      filter: "contrast(1.02) saturate(0.94)",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background:
+                        "linear-gradient(180deg, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.10) 35%, rgba(0,0,0,0.72) 100%)",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: isMobile ? 18 : 28,
+                      right: isMobile ? 18 : 28,
+                      bottom: isMobile ? 18 : 28,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "end",
+                      gap: 14,
+                    }}
+                  >
+                    <div>
+                      <div style={{ ...eyebrowLight, marginBottom: 10 }}>Featured image</div>
+                      <div
+                        style={{
+                          fontFamily: '"Times New Roman", Georgia, serif',
+                          fontSize: isMobile ? 30 : 42,
+                          lineHeight: 1,
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        Achievements
+                      </div>
+                    </div>
+                    <div style={{ ...eyebrowLight, textAlign: "right" }}>WDC · British Open · Blackpool</div>
+                  </div>
+                </FramedCard>
+
+                <FramedCard style={{ padding: isMobile ? 20 : 26 }}>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                      gap: isMobile ? 0 : 18,
+                    }}
+                  >
+                    <div style={{ paddingRight: isMobile ? 0 : 12 }}>
+                      <div style={eyebrowLight}>Top results</div>
+                      {achievements.slice(0, 6).map((achievement) => (
+                        <AchievementRow key={achievement} text={achievement} isMobile={isMobile} />
+                      ))}
+                    </div>
+                    <div style={{ paddingRight: isMobile ? 0 : 12 }}>
+                      <div style={eyebrowLight}>Additional highlights</div>
+                      {achievements.slice(6).map((achievement) => (
+                        <AchievementRow key={achievement} text={achievement} isMobile={isMobile} />
+                      ))}
+                    </div>
+                  </div>
+                </FramedCard>
               </div>
-            </Card>
-          </motion.div>
+            </motion.div>
+          </div>
         </Wrapper>
       </section>
 
       <section id="services">
-        <Wrapper
-          isMobile={isMobile}
-          style={{ paddingTop: isMobile ? 56 : 84, paddingBottom: isMobile ? 18 : 30 }}
-        >
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 28 : 54, paddingBottom: isMobile ? 56 : 90 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: isTablet ? "1fr" : "0.85fr 1.15fr",
+              gap: isMobile ? 20 : 32,
+              alignItems: "end",
+              marginBottom: 28,
+            }}
           >
-            <div style={sectionTitle}>What we offer</div>
-            <h2
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} transition={{ duration: 0.6 }}>
+              <SectionEyebrow>What we offer</SectionEyebrow>
+              <h2
+                style={{
+                  margin: 0,
+                  fontFamily: '"Times New Roman", Georgia, serif',
+                  fontSize: "clamp(2.4rem, 5.6vw, 5rem)",
+                  fontWeight: 400,
+                  lineHeight: 0.95,
+                  letterSpacing: "-0.04em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Performance, coaching, choreography, and elevated event experiences.
+              </h2>
+            </motion.div>
+            <div style={{ color: "rgba(255,255,255,0.64)", lineHeight: 1.8, fontSize: 16, maxWidth: 560 }}>
+              Crafted with a more editorial, monochrome-luxury direction while keeping the same structure,
+              content, and booking functionality.
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : "repeat(3, minmax(0, 1fr))",
+              gap: 0,
+              borderTop: "1px solid rgba(255,255,255,0.10)",
+              borderLeft: isMobile ? "none" : "1px solid rgba(255,255,255,0.10)",
+            }}
+          >
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <motion.div
+                  key={service.title}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.2 }}
+                  variants={fadeUp}
+                  transition={{ duration: 0.55, delay: index * 0.08 }}
+                  style={{ borderRight: "1px solid rgba(255,255,255,0.10)", borderBottom: "1px solid rgba(255,255,255,0.10)" }}
+                >
+                  <div style={{ padding: isMobile ? 22 : 30, minHeight: isMobile ? "auto" : 280 }}>
+                    <div
+                      style={{
+                        width: 54,
+                        height: 54,
+                        border: "1px solid rgba(255,255,255,0.12)",
+                        display: "grid",
+                        placeItems: "center",
+                        marginBottom: 24,
+                        color: "#8c1217",
+                      }}
+                    >
+                      <Icon size={24} />
+                    </div>
+                    <h3
+                      style={{
+                        margin: 0,
+                        fontFamily: '"Times New Roman", Georgia, serif',
+                        fontSize: isMobile ? 34 : 40,
+                        lineHeight: 0.95,
+                        fontWeight: 400,
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {service.title}
+                    </h3>
+                    <p style={{ marginTop: 18, color: "rgba(255,255,255,0.66)", lineHeight: 1.8, fontSize: 16 }}>
+                      {service.text}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </Wrapper>
+      </section>
+
+      <section id="about" style={{ background: "#f2efeb", color: "#171717" }}>
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 90, paddingBottom: isMobile ? 56 : 90 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: isTablet ? "1fr" : "0.9fr 1.1fr",
+              gap: isMobile ? 22 : 36,
+              alignItems: "start",
+            }}
+          >
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} variants={fadeUp} transition={{ duration: 0.6 }}>
+              <SectionEyebrow>About us</SectionEyebrow>
+              <div style={{ display: "grid", gap: 18 }}>
+                <img
+                  src="/images/dance3.jpg"
+                  alt="Stas and Marketa portrait"
+                  style={{ width: "100%", height: isMobile ? 360 : 470, objectFit: "cover", display: "block" }}
+                />
+                <div
+                  style={{
+                    padding: isMobile ? 20 : 24,
+                    border: "1px solid rgba(0,0,0,0.12)",
+                    background: "rgba(255,255,255,0.72)",
+                  }}
+                >
+                  <div style={{ color: "rgba(0,0,0,0.42)", fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 8 }}>
+                    Ideal for
+                  </div>
+                  <div style={{ fontSize: 18, lineHeight: 1.7 }}>
+                    Weddings, galas, luxury events, showcases, intensives
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} variants={fadeUp} transition={{ duration: 0.7 }}>
+              <h2
+                style={{
+                  marginTop: 0,
+                  marginBottom: 20,
+                  fontFamily: '"Times New Roman", Georgia, serif',
+                  fontSize: "clamp(2.2rem, 5vw, 4.4rem)",
+                  lineHeight: 0.96,
+                  fontWeight: 400,
+                  letterSpacing: "-0.04em",
+                  textTransform: "uppercase",
+                  color: "#8c1217",
+                }}
+              >
+                A partnership built on technique, trust, and striking performance.
+              </h2>
+              <p style={{ fontSize: isMobile ? 16 : 18, lineHeight: 1.9, color: "rgba(0,0,0,0.74)" }}>
+                Stas Olarescu (Moldova) and Markéta Vlčková (Prague) are a professional Latin partnership combining elite competitive results with a refined artistic background.
+                <br />
+                <br />
+                Stas began dancing at 7 and rose quickly through international ranks, becoming a Romanian National Amateur Champion before representing Singapore at major global events, including WDSF Grand Slams. He later transitioned to the professional circuit, competing at the world’s most prestigious events such as Blackpool, the UK Open, and World Championships.
+                <br />
+                <br />
+                Markéta grew up in a highly artistic family and trained from an early age in ballet, piano, and ballroom. She achieved national finals in the Czech Republic before continuing her career in Poland under world-class coaches, competing internationally at Blackpool, UK Championships, and World Championships. Alongside her dance career, she graduated with First-Class Honours from King’s College London.
+                <br />
+                <br />
+                Since forming their partnership in 2017, they have built an international career across Denmark, London, and Europe. Now competing professionally, they are British Open Rising Star Champions and European Championship finalists, known for combining technical precision with expressive, high-impact performance.
+                <br />
+                <br />
+                Together, they bring world-class competitive experience, international recognition, and a distinctive artistic identity to every performance and coaching experience.
+              </p>
+
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                  gap: 18,
+                  marginTop: 24,
+                }}
+              >
+                <div style={{ padding: 22, border: "1px solid rgba(0,0,0,0.12)", background: "rgba(255,255,255,0.66)" }}>
+                  <div style={{ color: "rgba(0,0,0,0.42)", fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 8 }}>
+                    Specialties
+                  </div>
+                  <div style={{ fontSize: 18, lineHeight: 1.7 }}>Technique, partnering, choreography, presence, musicality</div>
+                </div>
+                <div style={{ padding: 22, border: "1px solid rgba(0,0,0,0.12)", background: "rgba(255,255,255,0.66)" }}>
+                  <div style={{ color: "rgba(0,0,0,0.42)", fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 8 }}>
+                    Based in
+                  </div>
+                  <div style={{ fontSize: 18, lineHeight: 1.7 }}>Boston, MA · Dance Fever Studio</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </Wrapper>
+      </section>
+
+      <section id="gallery">
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 86, paddingBottom: isMobile ? 56 : 90 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: isTablet ? "1fr" : "0.85fr 1.15fr",
+              gap: isMobile ? 20 : 32,
+              alignItems: "end",
+              marginBottom: 26,
+            }}
+          >
+            <div>
+              <SectionEyebrow>Gallery</SectionEyebrow>
+              <h2
+                style={{
+                  margin: 0,
+                  fontFamily: '"Times New Roman", Georgia, serif',
+                  fontSize: "clamp(2.3rem, 5.6vw, 4.8rem)",
+                  lineHeight: 0.95,
+                  fontWeight: 400,
+                  textTransform: "uppercase",
+                }}
+              >
+                Moments from performance, competition, and collaboration.
+              </h2>
+            </div>
+            <div
               style={{
-                fontSize: "clamp(2rem, 5vw, 3rem)",
-                margin: 0,
-                letterSpacing: "-0.03em",
-                maxWidth: 780,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: isMobile ? "flex-start" : "space-between",
+                gap: 16,
+                flexWrap: isMobile ? "wrap" : "nowrap",
               }}
             >
-              Performance, coaching, choreography, and elevated event experiences.
-            </h2>
-          </motion.div>
-        </Wrapper>
+              <div style={{ color: "rgba(255,255,255,0.62)", lineHeight: 1.8, fontSize: 16, maxWidth: 420 }}>
+                Swipe or use the arrows to move through competition and portrait imagery.
+              </div>
+              <div style={{ display: "flex", gap: 10 }}>
+                <button type="button" onClick={() => scrollGallery("prev")} style={galleryNavButton}>←</button>
+                <button type="button" onClick={() => scrollGallery("next")} style={galleryNavButton}>→</button>
+              </div>
+            </div>
+          </div>
 
-        <Wrapper
-          isMobile={isMobile}
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: 20,
-            paddingBottom: isMobile ? 56 : 84,
-          }}
-        >
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            return (
+          <div
+            ref={galleryRef}
+            style={{
+              display: "grid",
+              gridAutoFlow: "column",
+              gridAutoColumns: isMobile ? "86%" : "minmax(340px, 33%)",
+              gap: 18,
+              overflowX: "auto",
+              scrollSnapType: "x mandatory",
+              paddingBottom: 8,
+              scrollbarWidth: "thin",
+            }}
+          >
+            {gallery.map((src, index) => (
               <motion.div
-                key={service.title}
+                key={src}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={fadeUp}
+                transition={{ duration: 0.55, delay: index * 0.05 }}
+                style={{ scrollSnapAlign: "start" }}
+              >
+                <div style={{ border: "1px solid rgba(255,255,255,0.08)", background: "#0d0d0f", overflow: "hidden" }}>
+                  <img
+                    src={src}
+                    alt={`Dance performance ${index + 1}`}
+                    style={{ width: "100%", height: isMobile ? 460 : 560, objectFit: "cover", display: "block" }}
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </Wrapper>
+      </section>
+
+      <section style={{ background: "#f2efeb", color: "#171717" }}>
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 86, paddingBottom: isMobile ? 56 : 90 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: isTablet ? "1fr" : "0.82fr 1.18fr",
+              gap: isMobile ? 22 : 34,
+            }}
+          >
+            <div>
+              <SectionEyebrow>Testimonials</SectionEyebrow>
+              <h2
+                style={{
+                  margin: 0,
+                  fontFamily: '"Times New Roman", Georgia, serif',
+                  fontSize: "clamp(2.3rem, 5vw, 4.2rem)",
+                  lineHeight: 0.95,
+                  fontWeight: 400,
+                  textTransform: "uppercase",
+                }}
+              >
+                Trusted to create moments people remember.
+              </h2>
+            </div>
+            <div style={{ color: "rgba(0,0,0,0.66)", lineHeight: 1.8, fontSize: 16, maxWidth: 500 }}>
+              Kept fully functional, but shifted into a more editorial, monochrome, art-direction-led visual language.
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : "repeat(3, minmax(0, 1fr))",
+              gap: 0,
+              marginTop: 28,
+              borderTop: "1px solid rgba(0,0,0,0.12)",
+              borderLeft: isMobile ? "none" : "1px solid rgba(0,0,0,0.12)",
+            }}
+          >
+            {testimonials.map((item, index) => (
+              <motion.div
+                key={item.name}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeUp}
                 transition={{ duration: 0.55, delay: index * 0.08 }}
+                style={{ borderRight: "1px solid rgba(0,0,0,0.12)", borderBottom: "1px solid rgba(0,0,0,0.12)" }}
               >
-                <Card style={{ padding: isMobile ? 22 : 28, minHeight: isMobile ? "auto" : 260 }}>
-                  <div
-                    style={{
-                      width: 52,
-                      height: 52,
-                      borderRadius: 18,
-                      display: "grid",
-                      placeItems: "center",
-                      background:
-                        "linear-gradient(135deg, rgba(255,255,255,0.10), rgba(212,175,55,0.12))",
-                      border: "1px solid rgba(212,175,55,0.22)",
-                    }}
-                  >
-                    <Icon size={24} />
+                <div style={{ padding: isMobile ? 22 : 28, minHeight: isMobile ? "auto" : 280 }}>
+                  <div style={{ display: "flex", gap: 4, marginBottom: 20 }}>
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={16} fill="#8c1217" color="#8c1217" />
+                    ))}
                   </div>
-                  <h3 style={{ fontSize: isMobile ? 24 : 28, marginTop: 22, marginBottom: 12 }}>
-                    {service.title}
-                  </h3>
-                  <p style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,255,255,0.68)" }}>
-                    {service.text}
-                  </p>
-                </Card>
+                  <div style={{ fontFamily: '"Times New Roman", Georgia, serif', fontSize: isMobile ? 28 : 34, lineHeight: 1.05, marginBottom: 18 }}>
+                    “{item.quote}”
+                  </div>
+                  <div style={{ fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(0,0,0,0.44)" }}>
+                    {item.name}
+                  </div>
+                </div>
               </motion.div>
-            );
-          })}
-        </Wrapper>
-      </section>
-
-      <section
-        style={{
-          borderTop: "1px solid rgba(255,255,255,0.08)",
-          borderBottom: "1px solid rgba(255,255,255,0.08)",
-          background: "rgba(255,255,255,0.03)",
-        }}
-      >
-        <Wrapper
-          isMobile={isMobile}
-          style={{
-            display: "grid",
-            gridTemplateColumns: isTablet ? "1fr" : "minmax(0, 1.1fr) minmax(0, 0.9fr)",
-            gap: isMobile ? 24 : 28,
-            alignItems: "center",
-            paddingTop: isMobile ? 56 : 84,
-            paddingBottom: isMobile ? 56 : 84,
-          }}
-        >
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.25 }}
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-          >
-            <div style={sectionTitle}>About us</div>
-            <h2
-              style={{
-                fontSize: "clamp(2rem, 5vw, 3rem)",
-                marginTop: 0,
-                marginBottom: 18,
-                letterSpacing: "-0.03em",
-              }}
-            >
-              A partnership built on technique, trust, and striking performance.
-            </h2>
-            <p
-              style={{
-                fontSize: isMobile ? 16 : 18,
-                lineHeight: 1.8,
-                color: "rgba(255,255,255,0.70)",
-                maxWidth: 640,
-              }}
-            >
-              Stas Olarescu (Moldova) and Markéta Vlčková (Prague) are a professional Latin partnership combining elite competitive results with a refined artistic background.
-              <br />
-              <br />
-              Stas began dancing at 7 and rose quickly through international ranks, becoming a Romanian National Amateur Champion before representing Singapore at major global events, including WDSF Grand Slams. He later transitioned to the professional circuit, competing at the world’s most prestigious events such as Blackpool, the UK Open, and World Championships.
-              <br />
-              <br />
-              Markéta grew up in a highly artistic family and trained from an early age in ballet, piano, and ballroom. She achieved national finals in the Czech Republic before continuing her career in Poland under world-class coaches, competing internationally at Blackpool, UK Championships, and World Championships. Alongside her dance career, she graduated with First-Class Honours from King’s College London.
-              <br />
-              <br />
-              Since forming their partnership in 2017, they have built an international career across Denmark, London, and Europe. Now competing professionally, they are British Open Rising Star Champions and European Championship finalists, known for combining technical precision with expressive, high-impact performance.
-              <br />
-              <br />
-              Together, they bring world-class competitive experience, international recognition, and a distinctive artistic identity to every performance and coaching experience.
-            </p>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(220px, 1fr))",
-                gap: 16,
-                marginTop: 28,
-              }}
-            >
-              <Card style={{ padding: 22 }}>
-                <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, marginBottom: 8 }}>
-                  Ideal for
-                </div>
-                <div style={{ fontSize: 18, lineHeight: 1.6 }}>
-                  Weddings, galas, luxury events, showcases, intensives
-                </div>
-              </Card>
-              <Card style={{ padding: 22 }}>
-                <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, marginBottom: 8 }}>
-                  Specialties
-                </div>
-                <div style={{ fontSize: 18, lineHeight: 1.6 }}>
-                  Technique, partnering, choreography, presence, musicality
-                </div>
-              </Card>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.7 }}
-            style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(220px, 1fr))",
-              gap: 16,
-            }}
-          >
-            {featureCards.map((card) => {
-              const Icon = card.icon;
-              return (
-                <Card key={card.title} style={{ padding: 24 }}>
-                  <Icon size={26} />
-                  <div style={{ fontSize: 24, marginTop: 22, marginBottom: 10 }}>{card.title}</div>
-                  <div style={{ color: "rgba(255,255,255,0.66)", lineHeight: 1.7 }}>{card.text}</div>
-                </Card>
-              );
-            })}
-          </motion.div>
-        </Wrapper>
-      </section>
-
-      <section>
-        <Wrapper
-          isMobile={isMobile}
-          style={{ paddingTop: isMobile ? 56 : 84, paddingBottom: isMobile ? 20 : 28 }}
-        >
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-          >
-            <div style={sectionTitle}>Gallery</div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: isMobile ? "flex-start" : "center",
-                justifyContent: "space-between",
-                gap: 16,
-                flexDirection: isMobile ? "column" : "row",
-              }}
-            >
-              <h2 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", margin: 0, letterSpacing: "-0.03em" }}>
-                Moments from performance, competition, and collaboration.
-              </h2>
-
-              <div style={{ display: "flex", gap: 10 }}>
-                <button type="button" onClick={() => scrollGallery("prev")} style={galleryNavButton}>
-                  ←
-                </button>
-                <button type="button" onClick={() => scrollGallery("next")} style={galleryNavButton}>
-                  →
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        </Wrapper>
-
-        <Wrapper isMobile={isMobile} style={{ paddingBottom: isMobile ? 56 : 84 }}>
-          {hasGalleryImages ? (
-            <div
-              ref={galleryRef}
-              style={{
-                display: "grid",
-                gridAutoFlow: "column",
-                gridAutoColumns: isMobile ? "84%" : "minmax(320px, 36%)",
-                gap: 18,
-                overflowX: "auto",
-                scrollSnapType: "x mandatory",
-                paddingBottom: 8,
-                scrollbarWidth: "thin",
-              }}
-            >
-              {gallery.map((src, index) => (
-                <motion.div
-                  key={src}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.2 }}
-                  variants={fadeUp}
-                  transition={{ duration: 0.55, delay: index * 0.05 }}
-                  style={{ scrollSnapAlign: "start" }}
-                >
-                  <Card style={{ overflow: "hidden" }}>
-                    <img
-                      src={src}
-                      alt={`Dance performance ${index + 1}`}
-                      style={{
-                        width: "100%",
-                        height: isMobile ? 420 : 520,
-                        objectFit: "cover",
-                        display: "block",
-                      }}
-                    />
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          ) : (
-            <Card style={{ padding: 24 }}>
-              <div style={{ color: "rgba(255,255,255,0.72)", lineHeight: 1.7 }}>
-                Add image filenames to <strong>galleryImageNames</strong> at the top of this file and make sure the files are inside <strong>public/images</strong>.
-              </div>
-            </Card>
-          )}
-        </Wrapper>
-      </section>
-
-      <section>
-        <Wrapper isMobile={isMobile} style={{ paddingBottom: isMobile ? 20 : 28 }}>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-          >
-            <div style={sectionTitle}>Testimonials</div>
-            <h2 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", margin: 0, letterSpacing: "-0.03em" }}>
-              Trusted to create moments people remember.
-            </h2>
-          </motion.div>
-        </Wrapper>
-
-        <Wrapper
-          isMobile={isMobile}
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: 18,
-            paddingBottom: isMobile ? 56 : 84,
-          }}
-        >
-          {testimonials.map((item, index) => (
-            <motion.div
-              key={item.name}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeUp}
-              transition={{ duration: 0.55, delay: index * 0.08 }}
-            >
-              <Card style={{ padding: isMobile ? 22 : 28, minHeight: isMobile ? "auto" : 250 }}>
-                <div style={{ display: "flex", gap: 4, opacity: 0.9, marginBottom: 18 }}>
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} fill="#d4af37" color="#d4af37" />
-                  ))}
-                </div>
-                <div
-                  style={{
-                    fontSize: isMobile ? 18 : 20,
-                    lineHeight: 1.8,
-                    color: "rgba(255,255,255,0.78)",
-                  }}
-                >
-                  “{item.quote}”
-                </div>
-                <div
-                  style={{
-                    marginTop: 24,
-                    fontSize: 13,
-                    letterSpacing: "0.22em",
-                    textTransform: "uppercase",
-                    color: "rgba(224,197,126,0.72)",
-                  }}
-                >
-                  {item.name}
-                </div>
-              </Card>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </Wrapper>
       </section>
 
       <section id="contact">
-        <Wrapper isMobile={isMobile} style={{ paddingBottom: isMobile ? 64 : 96 }}>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
+        <Wrapper isMobile={isMobile} style={{ paddingTop: isMobile ? 56 : 86, paddingBottom: isMobile ? 64 : 96 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: isTablet ? "1fr" : "0.82fr 1.18fr",
+              gap: isMobile ? 22 : 34,
+            }}
           >
-            <Card
-              style={{
-                overflow: "hidden",
-                background: "linear-gradient(135deg, rgba(255,255,255,0.10), rgba(212,175,55,0.10))",
-              }}
-            >
-              <div
+            <div>
+              <SectionEyebrow>Book us</SectionEyebrow>
+              <h2
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(300px, 1fr))",
-                  gap: isMobile ? 22 : 30,
-                  padding: isMobile ? 20 : 32,
+                  marginTop: 0,
+                  marginBottom: 18,
+                  fontFamily: '"Times New Roman", Georgia, serif',
+                  fontSize: "clamp(2.4rem, 5vw, 4.6rem)",
+                  lineHeight: 0.95,
+                  fontWeight: 400,
+                  textTransform: "uppercase",
                 }}
               >
-                <div>
-                  <div style={sectionTitle}>Book us</div>
-                  <h2
-                    style={{
-                      fontSize: "clamp(2rem, 5vw, 3rem)",
-                      marginTop: 0,
-                      marginBottom: 18,
-                      letterSpacing: "-0.03em",
-                    }}
-                  >
-                    Let’s create something unforgettable.
-                  </h2>
-                  <p
-                    style={{
-                      fontSize: isMobile ? 16 : 18,
-                      lineHeight: 1.8,
-                      color: "rgba(255,255,255,0.72)",
-                      maxWidth: 620,
-                    }}
-                  >
-                    Reach out for performances, choreography, workshops, private coaching, wedding dance services,
-                    or destination bookings.
-                  </p>
+                Let’s create something unforgettable.
+              </h2>
+              <p style={{ fontSize: isMobile ? 16 : 18, lineHeight: 1.9, color: "rgba(255,255,255,0.70)", maxWidth: 520 }}>
+                Reach out for performances, choreography, workshops, private coaching, wedding dance services,
+                or destination bookings.
+              </p>
 
-                  <div style={{ display: "grid", gap: 14, marginTop: 26, color: "rgba(255,255,255,0.78)" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                      <Mail size={18} />
-                      <a
-                        href="mailto:dance@stasmarketa.com"
-                        style={{ color: "inherit", textDecoration: "none", overflowWrap: "anywhere" }}
-                      >
-                        dance@stasmarketa.com
-                      </a>
-                    </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                      <Phone size={18} />
-                      <span style={{ lineHeight: 1.7 }}>
-                        <a href="tel:16176783197" style={{ color: "inherit", textDecoration: "none" }}>
-                          Marketa: 617-678-3197
-                        </a>
-                        <br />
-                        <a href="tel:16177755365" style={{ color: "inherit", textDecoration: "none" }}>
-                          Stas: 617-775-5365
-                        </a>
-                      </span>
-                    </div>
-                    <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
-                      <MapPin size={18} style={{ marginTop: 4, flexShrink: 0 }} />
-                      <a
-                        href="https://maps.google.com/?q=Dance+Fever+Studio+200+Wells+Ave+Newton+MA+02459"
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{ color: "inherit", textDecoration: "none", lineHeight: 1.7 }}
-                      >
-                        Boston, MA · Dance Fever Studio
-                        <br />
-                        200 Wells Ave, Newton, MA 02459
-                      </a>
-                    </div>
-                  </div>
+              <div style={{ display: "grid", gap: 14, marginTop: 30, color: "rgba(255,255,255,0.78)" }}>
+                <div style={contactRow}>
+                  <Mail size={18} />
+                  <a href="mailto:dance@stasmarketa.com" style={contactLink}>dance@stasmarketa.com</a>
                 </div>
-
-                <form
-                  name="booking"
-                  method="POST"
-                  action="/success/"
-                  data-netlify="true"
-                  netlify-honeypot="bot-field"
-                  style={{
-                    display: "grid",
-                    gap: 14,
-                    padding: isMobile ? 18 : 24,
-                    borderRadius: 24,
-                    border: "1px solid rgba(255,255,255,0.10)",
-                    background: "rgba(20,20,30,0.35)",
-                    backdropFilter: "blur(18px)",
-                    WebkitBackdropFilter: "blur(18px)",
-                  }}
-                >
-                  {/* REQUIRED hidden inputs */}
-                  <input type="hidden" name="form-name" value="booking" />
-
-                  <p style={{ display: "none" }}>
-                    <label>
-                      Don’t fill this out if you’re human: <input name="bot-field" />
-                    </label>
-                  </p>
-
-                  {/* NAME */}
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your name"
-                    required
-                    style={inputStyle}
-                  />
-
-                  {/* EMAIL */}
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your email"
-                    required
-                    style={inputStyle}
-                  />
-
-                  {/* SERVICE */}
-                  <input
-                    type="text"
-                    name="service"
-                    placeholder="Type of inquiry (lessons, performance, wedding...)"
-                    style={inputStyle}
-                  />
-
-                  {/* MESSAGE */}
-                  <textarea
-                    name="message"
-                    placeholder="Tell us more about your request"
-                    rows="4"
-                    required
-                    style={inputStyle}
-                  />
-
-                  {/* BUTTON */}
-                  <button
-                    type="submit"
-                    style={{
-                      marginTop: 10,
-                      padding: "14px 18px",
-                      borderRadius: 18,
-                      border: "none",
-                      fontWeight: 600,
-                      cursor: "pointer",
-                      background:
-                        "linear-gradient(135deg, #f6e7bf 0%, #d4af37 55%, #b8891f 100%)",
-                      color: "#17120a",
-                    }}
+                <div style={contactRow}>
+                  <Phone size={18} />
+                  <span style={{ lineHeight: 1.8 }}>
+                    <a href="tel:16176783197" style={contactLink}>Marketa: 617-678-3197</a>
+                    <br />
+                    <a href="tel:16177755365" style={contactLink}>Stas: 617-775-5365</a>
+                  </span>
+                </div>
+                <div style={{ ...contactRow, alignItems: "flex-start" }}>
+                  <MapPin size={18} style={{ marginTop: 4, flexShrink: 0 }} />
+                  <a
+                    href="https://maps.google.com/?q=Dance+Fever+Studio+200+Wells+Ave+Newton+MA+02459"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ ...contactLink, lineHeight: 1.8 }}
                   >
-                    Send Inquiry →
-                  </button>
-                </form>
+                    Boston, MA · Dance Fever Studio
+                    <br />
+                    200 Wells Ave, Newton, MA 02459
+                  </a>
+                </div>
               </div>
-            </Card>
-          </motion.div>
+            </div>
+
+            <div style={{ border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.03)" }}>
+              <form
+                name="booking"
+                method="POST"
+                action="/success/"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                style={{ display: "grid", gap: 16, padding: isMobile ? 22 : 30 }}
+              >
+                <input type="hidden" name="form-name" value="booking" />
+                <p style={{ display: "none" }}>
+                  <label>
+                    Don’t fill this out if you’re human: <input name="bot-field" />
+                  </label>
+                </p>
+
+                <input type="text" name="name" placeholder="Your name" required style={inputStyle} />
+                <input type="email" name="email" placeholder="Your email" required style={inputStyle} />
+                <input
+                  type="text"
+                  name="service"
+                  placeholder="Type of inquiry (lessons, performance, wedding...)"
+                  style={inputStyle}
+                />
+                <textarea
+                  name="message"
+                  rows={isMobile ? 4 : 5}
+                  placeholder="Tell us more about your request"
+                  required
+                  style={{ ...inputStyle, resize: "vertical" }}
+                />
+                <button type="submit" style={submitStyle}>
+                  Send Inquiry <ArrowRight size={16} />
+                </button>
+              </form>
+            </div>
+          </div>
         </Wrapper>
       </section>
     </div>
   );
 }
 
+const navLink = {
+  color: "inherit",
+  textDecoration: "none",
+};
+
+const eyebrowLight = {
+  fontSize: 11,
+  letterSpacing: "0.24em",
+  textTransform: "uppercase",
+  color: "rgba(255,255,255,0.58)",
+};
+
+const contactRow = {
+  display: "flex",
+  alignItems: "center",
+  gap: 12,
+};
+
+const contactLink = {
+  color: "inherit",
+  textDecoration: "none",
+};
+
 const inputStyle = {
   appearance: "none",
   width: "100%",
-  padding: "14px 16px",
-  borderRadius: 16,
-  border: "1px solid rgba(255,255,255,0.10)",
-  background: "rgba(255,255,255,0.05)",
+  padding: "16px 18px",
+  border: "1px solid rgba(255,255,255,0.14)",
+  background: "transparent",
   color: "white",
   fontSize: 15,
   outline: "none",
@@ -945,11 +976,10 @@ const inputStyle = {
 };
 
 const galleryNavButton = {
-  width: 46,
-  height: 46,
-  borderRadius: 999,
-  border: "1px solid rgba(212,175,55,0.28)",
-  background: "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(212,175,55,0.10))",
+  width: 48,
+  height: 48,
+  border: "1px solid rgba(255,255,255,0.14)",
+  background: "transparent",
   color: "white",
   cursor: "pointer",
   fontSize: 20,
@@ -960,12 +990,13 @@ const submitStyle = {
   alignItems: "center",
   justifyContent: "center",
   gap: 10,
-  padding: "15px 18px",
-  borderRadius: 18,
-  border: "none",
-  background: "linear-gradient(135deg, #f6e7bf 0%, #d4af37 55%, #b8891f 100%)",
-  color: "#17120a",
-  fontWeight: 700,
-  fontSize: 15,
+  height: 54,
+  border: "1px solid rgba(255,255,255,0.08)",
+  background: "#8c1217",
+  color: "#f7f2ed",
+  fontWeight: 600,
+  fontSize: 14,
+  textTransform: "uppercase",
+  letterSpacing: "0.1em",
   cursor: "pointer",
 };
