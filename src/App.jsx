@@ -57,7 +57,14 @@ const galleryImageNames = [
   "dance3.jpg",
   "dance4.jpg",
   "dance5.jpg",
-  "dance6.jpg",
+  "dance7.jpg",
+  "dance8.jpg",
+  "dance9.jpg",
+  "dance10.jpg",
+  "dance11.jpg",
+  "dance12.jpg",
+  "dance13.jpg",
+  "dance14.jpg",
 ];
 
 const gallery = galleryImageNames.map((name) => `/images/${name}`);
@@ -109,8 +116,8 @@ function Wrapper({ children, style, isMobile }) {
         width: "100%",
         maxWidth: 1240,
         margin: "0 auto",
-        paddingLeft: isMobile ? 18 : 36,
-        paddingRight: isMobile ? 18 : 36,
+        paddingLeft: isMobile ? 14 : 36,
+        paddingRight: isMobile ? 14 : 36,
         ...style,
       }}
     >
@@ -160,6 +167,7 @@ function PrimaryButton({ children, href = "#contact", fullWidth = false }) {
         justifyContent: "center",
         gap: 10,
         width: fullWidth ? "100%" : 190,
+        maxWidth: fullWidth ? "100%" : 190,
         height: 54,
         background: "#8c1217",
         color: "#f7f2ed",
@@ -184,6 +192,7 @@ function SecondaryButton({ children, href = "#services", fullWidth = false }) {
         alignItems: "center",
         justifyContent: "center",
         width: fullWidth ? "100%" : 190,
+        maxWidth: fullWidth ? "100%" : 190,
         height: 54,
         background: "transparent",
         color: "rgba(255,255,255,0.92)",
@@ -272,7 +281,7 @@ export default function BallroomWebsite() {
                 width: isMobile ? "100%" : "auto",
                 textAlign: isMobile ? "center" : "left",
                 fontFamily: '"Times New Roman", Georgia, serif',
-                fontSize: isMobile ? 26 : 34,
+                fontSize: isMobile ? 24 : 34,
                 letterSpacing: "0.05em",
               }}
             >
@@ -283,7 +292,7 @@ export default function BallroomWebsite() {
                 width: isMobile ? "100%" : "auto",
                 display: "flex",
                 justifyContent: isMobile ? "center" : "flex-end",
-                gap: isMobile ? 14 : 24,
+                gap: isMobile ? 12 : 24,
                 flexWrap: "wrap",
                 fontSize: 11,
                 letterSpacing: "0.22em",
@@ -309,7 +318,7 @@ export default function BallroomWebsite() {
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7 }}>
               <Frame
                 style={{
-                  padding: isMobile ? 22 : 34,
+                  padding: isMobile ? 16 : 34,
                   minHeight: isMobile ? "auto" : 720,
                   display: "flex",
                   flexDirection: "column",
@@ -322,13 +331,13 @@ export default function BallroomWebsite() {
                       display: "inline-flex",
                       alignItems: "center",
                       justifyContent: isMobile ? "center" : "flex-start",
-                      gap: 10,
-                      padding: "10px 14px",
+                      gap: isMobile ? 8 : 10,
+                      padding: isMobile ? "9px 10px" : "10px 14px",
                       border: "1px solid rgba(255,255,255,0.12)",
                       color: "rgba(255,255,255,0.72)",
-                      fontSize: 12,
-                      letterSpacing: "0.06em",
-                      marginBottom: 28,
+                      fontSize: isMobile ? 10 : 12,
+                      letterSpacing: isMobile ? "0.03em" : "0.06em",
+                      marginBottom: isMobile ? 20 : 28,
                       width: isMobile ? "100%" : "auto",
                       boxSizing: "border-box",
                       textAlign: "center",
@@ -343,8 +352,10 @@ export default function BallroomWebsite() {
                       style={{
                         margin: 0,
                         fontFamily: '"Times New Roman", Georgia, serif',
-                        fontSize: isMobile ? "clamp(3rem, 14vw, 4.6rem)" : "clamp(4.4rem, 8vw, 7.4rem)",
-                        lineHeight: 0.9,
+                        fontSize: isMobile ? "clamp(2.05rem, 9vw, 3.2rem)" : "clamp(4.4rem, 8vw, 7.4rem)",
+                        lineHeight: isMobile ? 0.94 : 0.9,
+                        wordBreak: "normal",
+                        overflowWrap: "anywhere",
                         fontWeight: 400,
                         letterSpacing: "-0.04em",
                         textTransform: "uppercase",
@@ -359,7 +370,7 @@ export default function BallroomWebsite() {
                         marginBottom: 0,
                         maxWidth: 620,
                         color: "rgba(255,255,255,0.72)",
-                        fontSize: isMobile ? 17 : 21,
+                        fontSize: isMobile ? 15 : 21,
                         lineHeight: 1.7,
                         marginLeft: isMobile ? "auto" : 0,
                         marginRight: isMobile ? "auto" : 0,
@@ -376,7 +387,7 @@ export default function BallroomWebsite() {
                     style={{
                       display: "grid",
                       gridTemplateColumns: isMobile ? "1fr" : "190px 190px",
-                      gap: 14,
+                      gap: 12,
                       justifyContent: isMobile ? "stretch" : "start",
                       marginBottom: 28,
                     }}
@@ -393,7 +404,7 @@ export default function BallroomWebsite() {
                     style={{
                       display: "grid",
                       gridTemplateColumns: isMobile ? "1fr" : "repeat(3, minmax(0, 1fr))",
-                      gap: isMobile ? 12 : 0,
+                      gap: isMobile ? 8 : 0,
                       borderTop: "1px solid rgba(255,255,255,0.10)",
                       textAlign: isMobile ? "center" : "left",
                     }}
@@ -406,7 +417,7 @@ export default function BallroomWebsite() {
                       <div
                         key={item}
                         style={{
-                          padding: isMobile ? "16px 0 0" : "18px 18px 0 0",
+                          padding: isMobile ? "12px 0 0" : "18px 18px 0 0",
                           borderRight:
                             !isMobile && index < 2 ? "1px solid rgba(255,255,255,0.08)" : "none",
                           color: "rgba(255,255,255,0.64)",
@@ -502,8 +513,6 @@ export default function BallroomWebsite() {
                       {achievements.slice(0, 6).map((achievement) => (
                         <AchievementRow key={achievement} text={achievement} isMobile={isMobile} />
                       ))}
-                    </div>
-                    <div>
                     </div>
                   </div>
                 </Frame>
@@ -954,6 +963,7 @@ const navLink = {
 
 const overlayLabel = {
   fontSize: 11,
+  lineHeight: 1.4,
   letterSpacing: "0.24em",
   textTransform: "uppercase",
   color: "rgba(255,255,255,0.58)",
