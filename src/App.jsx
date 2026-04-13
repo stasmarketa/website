@@ -83,7 +83,7 @@ const achievements = [
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
 };
 
@@ -306,7 +306,7 @@ export default function BallroomWebsite() {
               initial="hidden"
               animate="visible"
               variants={fadeUp}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <Frame
                 style={{
@@ -345,7 +345,10 @@ export default function BallroomWebsite() {
                     }}
                   >
                     <SectionLabel>Stas &amp; Marketa</SectionLabel>
-                    <h1
+                    <motion.h1
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1.2, ease: "easeOut" }}
                       style={{
                         margin: 0,
                         fontFamily: '"Times New Roman", Georgia, serif',
@@ -360,18 +363,8 @@ export default function BallroomWebsite() {
                         textTransform: "uppercase",
                       }}
                     >
-                      <>
-                        Ballroom artistry
-                        <br />
-                        with elegance,
-                        <br />
-                        intensity, and
-                        <br />
-                        unforgettable
-                        <br />
-                        presence.
-                      </>
-                    </h1>
+                      Ballroom artistry<br />with elegance,<br />intensity, and<br />unforgettable<br />presence.
+                    </motion.h1>
 
                     <p
                       style={{
@@ -454,7 +447,7 @@ export default function BallroomWebsite() {
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.15 }}
+              transition={{ duration: 1, delay: 0.15, ease: "easeOut" }}
             >
               <div
                 style={{
@@ -571,7 +564,7 @@ export default function BallroomWebsite() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeUp}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <SectionLabel>What we offer</SectionLabel>
               <h2
@@ -600,66 +593,146 @@ export default function BallroomWebsite() {
             }}
           >
             {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <motion.div
-                  key={service.title}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.2 }}
-                  variants={fadeUp}
-                  transition={{ duration: 0.55, delay: index * 0.08 }}
-                  style={{
-                    borderRight: isMobile ? "none" : "1px solid rgba(255,255,255,0.10)",
-                    borderBottom: "1px solid rgba(255,255,255,0.10)",
-                    textAlign: isMobile ? "center" : "left",
-                  }}
-                >
-                  <div style={{ padding: isMobile ? 22 : 30, minHeight: isMobile ? "auto" : 280 }}>
-                    <div
-                      style={{
-                        width: 54,
-                        height: 54,
-                        border: "1px solid rgba(255,255,255,0.12)",
-                        display: "grid",
-                        placeItems: "center",
-                        marginBottom: 24,
-                        color: "#8c1217",
-                        marginLeft: isMobile ? "auto" : 0,
-                        marginRight: isMobile ? "auto" : 0,
-                      }}
-                    >
-                      <Icon size={24} />
-                    </div>
-                    <h3
-                      style={{
-                        margin: 0,
-                        fontFamily: '"Times New Roman", Georgia, serif',
-                        fontSize: isMobile ? 34 : 40,
-                        lineHeight: 0.95,
-                        fontWeight: 400,
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      {service.title}
-                    </h3>
-                    <p
-                      style={{
-                        marginTop: 18,
-                        color: "rgba(255,255,255,0.66)",
-                        lineHeight: 1.8,
-                        fontSize: 16,
-                        maxWidth: isMobile ? 500 : "none",
-                        marginLeft: isMobile ? "auto" : 0,
-                        marginRight: isMobile ? "auto" : 0,
-                      }}
-                    >
-                      {service.text}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
+  const Icon = service.icon;
+
+  const videoMap = {
+    "Professional Performances": "/videos/PROFESSIONAL PERFORMANCES.mp4",
+    "Private Coaching": "/videos/PRIVATE COACHING.mp4",
+    "Choreography & Showcases": "/videos/CHOREOGRAPHY & SHOWCASES.mp4",
+  };
+
+  const videoSrc = videoMap[service.title];
+
+  return (
+    <motion.div
+      key={service.title}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={fadeUp}
+      transition={{ duration: 0.8, delay: index * 0.08, ease: "easeOut" }}
+      whileHover={!isMobile ? { y: -4 } : undefined}
+      style={{
+        borderRight: isMobile ? "none" : "1px solid rgba(255,255,255,0.10)",
+        borderBottom: "1px solid rgba(255,255,255,0.10)",
+        position: "relative",
+        overflow: "hidden",
+        textAlign: isMobile ? "center" : "left",
+      }}
+    >
+      {!isMobile && videoSrc && (
+        <motion.video
+          src={videoSrc}
+          autoPlay
+          muted
+          loop
+          playsInline
+          initial={{ scale: 1.02 }}
+          animate={{ scale: 1.08 }}
+          transition={{ duration: 14, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            zIndex: 0,
+            filter: "brightness(0.85) contrast(1.05) saturate(0.95)",
+          }}
+        />
+      )}
+
+      <motion.div
+        initial={false}
+        whileHover={!isMobile ? { background: "rgba(0,0,0,0.48)" } : undefined}
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "rgba(0,0,0,0.55)",
+          zIndex: 1,
+        }}
+      />
+
+      {!isMobile && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 1,
+            pointerEvents: "none",
+            backgroundImage:
+              "radial-gradient(rgba(255,255,255,0.05) 0.6px, transparent 0.6px)",
+            backgroundSize: "6px 6px",
+            mixBlendMode: "soft-light",
+            opacity: 0.18,
+          }}
+        />
+      )}
+
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          padding: isMobile ? 22 : 30,
+          minHeight: isMobile ? "auto" : 280,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <div>
+          <div
+            style={{
+              width: 54,
+              height: 54,
+              border: "1px solid rgba(255,255,255,0.12)",
+              display: "grid",
+              placeItems: "center",
+              marginBottom: 24,
+              color: "#8c1217",
+              marginLeft: isMobile ? "auto" : 0,
+              marginRight: isMobile ? "auto" : 0,
+              backdropFilter: !isMobile ? "blur(4px)" : "none",
+              background: !isMobile ? "rgba(0,0,0,0.22)" : "transparent",
+            }}
+          >
+            <Icon size={24} />
+          </div>
+
+          <h3
+            style={{
+              margin: 0,
+              fontFamily: '"Times New Roman", Georgia, serif',
+              fontSize: isMobile ? 34 : 40,
+              lineHeight: 0.95,
+              fontWeight: 400,
+              textTransform: "uppercase",
+              textShadow: !isMobile ? "0 10px 30px rgba(0,0,0,0.35)" : "none",
+            }}
+          >
+            {service.title}
+          </h3>
+        </div>
+
+        <p
+          style={{
+            marginTop: 18,
+            color: "rgba(255,255,255,0.78)",
+            lineHeight: 1.8,
+            fontSize: 16,
+            maxWidth: isMobile ? 500 : 340,
+            marginLeft: isMobile ? "auto" : 0,
+            marginRight: isMobile ? "auto" : 0,
+            textShadow: !isMobile ? "0 8px 24px rgba(0,0,0,0.35)" : "none",
+          }}
+        >
+          {service.text}
+        </p>
+      </div>
+    </motion.div>
+  );
+})}
           </div>
         </Wrapper>
       </section>
@@ -699,7 +772,7 @@ export default function BallroomWebsite() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.25 }}
               variants={fadeUp}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               style={{ textAlign: isMobile ? "center" : "left" }}
             >
               <h2
@@ -884,7 +957,7 @@ export default function BallroomWebsite() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeUp}
-                transition={{ duration: 0.55, delay: index * 0.05 }}
+                transition={{ duration: 0.8, delay: index * 0.05, ease: "easeOut" }}
                 style={{ scrollSnapAlign: "start" }}
               >
                 <div
@@ -959,7 +1032,7 @@ export default function BallroomWebsite() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeUp}
-                transition={{ duration: 0.55, delay: index * 0.08 }}
+                transition={{ duration: 0.8, delay: index * 0.08, ease: "easeOut" }}
                 style={{
                   borderRight: isMobile ? "none" : "1px solid rgba(0,0,0,0.12)",
                   borderBottom: "1px solid rgba(0,0,0,0.12)",
