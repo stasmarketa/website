@@ -620,7 +620,7 @@ export default function BallroomWebsite() {
         textAlign: isMobile ? "center" : "left",
       }}
     >
-      {!isMobile && videoSrc && (
+      {videoSrc && (
         <motion.video
           src={videoSrc}
           autoPlay
@@ -654,21 +654,19 @@ export default function BallroomWebsite() {
         }}
       />
 
-      {!isMobile && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 1,
-            pointerEvents: "none",
-            backgroundImage:
-              "radial-gradient(rgba(255,255,255,0.05) 0.6px, transparent 0.6px)",
-            backgroundSize: "6px 6px",
-            mixBlendMode: "soft-light",
-            opacity: 0.18,
-          }}
-        />
-      )}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: "none",
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,0.05) 0.6px, transparent 0.6px)",
+          backgroundSize: "6px 6px",
+          mixBlendMode: "soft-light",
+          opacity: 0.18,
+        }}
+      />
 
       <div
         style={{
